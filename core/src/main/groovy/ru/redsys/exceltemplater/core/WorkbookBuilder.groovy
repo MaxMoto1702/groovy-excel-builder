@@ -11,7 +11,6 @@ class WorkbookBuilder {
     final static STYLE_ATTRIBUTES = ['border', 'backgroundColor', 'align', 'verticalAlign']
 
     Workbook workbook
-    Styler styler
     private def currentSheet
     private def currentRow
     private def currentCell

@@ -1,8 +1,5 @@
 package ru.redsys.example.style;
 
-/**
- * Created by max on 03/06/16.
- */
 public class FontStyle {
 
     /**
