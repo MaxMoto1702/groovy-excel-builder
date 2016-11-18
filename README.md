@@ -60,10 +60,10 @@ builder.build {
         // this row not necessary, this row show only dummy-row
         row { /* dummy */ }
     }
-    sheet(name: "Demo config height and width") {
+    sheet(name: "Demo config height and width", widthColumns: [default, 25, 30]) {
         row(height: 10) {
             cell {
-                "this row has height 30"
+                "this row has height 30 and default width"
             }
         }
         row {
@@ -71,26 +71,12 @@ builder.build {
             cell(width: 30) {
                 "this column has width 30"
             }
-            cell(width: 30) {
-                "this column hasn't width 30, see down"
-            }
-        }
-        row {
-            cell { /* dummy */ }
-            cell { /* dummy */ }
             cell(width: 50) {
-                // Какую политику использовать или какой вариант более явный и очевидный:
-                //  - устанавливать новую ширину
-                //  - оставлять прежнюю ширину и выводить предупредение в лог
-                //  - использовать для ширины максимальное значение
-                // ?
-                // П.С. Например, если установить на уровне листа ширину, то установка 
-                //  ширины на уровне колонки будет запрещена или проигнорирована (см. ниже)
-                "this column has width 50 and replaced width in previous row"
+                "this column has width 35"
             }
         }
     }
-    sheet(name: "Demo config global width", widthColumns: [20, 25, 30]) {
+    sheet(name: "Demo config width", widthColumns: [20, 25, 30]) {
         row {
             cell {
                 "this column has width 20"
@@ -155,5 +141,4 @@ builder.build {
 ![Demo styles](example-2.png)
 ![Demo spans](example-3.png)
 ![Demo config height and width](example-4.png)
-![Demo Demo config global width](example-5.png)
 ![Demo Demo dynamic data](example-6.png)
