@@ -60,7 +60,7 @@ builder.build {
         // this row not necessary, this row show only dummy-row
         row { /* dummy */ }
     }
-    sheet(name: "Demo config height and width", widthColumns: [default, 25, 30]) {
+    sheet(name: "Demo config height and width", widthColumns: ['default', 25, 30]) {
         row(height: 10) {
             cell {
                 "this row has height 30 and default width"
@@ -76,25 +76,7 @@ builder.build {
             }
         }
     }
-    sheet(name: "Demo config width", widthColumns: [20, 25, 30]) {
-        row {
-            cell {
-                "this column has width 20"
-            }
-            cell {
-                "this column has width 25"
-            }
-            cell {
-                "this column has width 30"
-            }
-        }
-        row {
-            cell(width: 100) {
-                "this column has width 20 and width not replaced"
-            }
-        }
-    }
-    sheet(name: "Demo dynamic data", widthColumns: [12, 12) {
+    sheet(name: "Demo dynamic data", widthColumns: [12, 12]) {
         def data1 = [
             ["value 1", "value 2"],
             ["value 3", "value 4"],
@@ -141,4 +123,4 @@ builder.build {
 ![Demo styles](example-2.png)
 ![Demo spans](example-3.png)
 ![Demo config height and width](example-4.png)
-![Demo Demo dynamic data](example-6.png)
+![Demo Demo dynamic data](example-5.png)
