@@ -43,6 +43,7 @@ class SampleExcelBuild {
                     cell(colspan: 2) {
                         "cell has width 2 columns"
                     }
+                    cell { /* dummy */ }
                     cell(rowspan: 2, style: WRAP, width: 12) {
                         "cell has height 2 rows"
                     }
