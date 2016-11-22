@@ -16,8 +16,10 @@ class ExcelBuilder {
     def currentSheet
     def currentRowIndex
     def currentRow
+    def currentRowStyle
     def currentCellIndex
     def currentCell
+    def currentCellStyle
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // CONFIGURE ///////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -89,8 +91,9 @@ class ExcelBuilder {
     def row(Map params = null, Closure closure = null) {
         currentRowIndex++
         currentRow = currentSheet.createRow(currentRowIndex) as Row
-        if (params?.style && styles[params?.style?.toString()])
-            currentRow.rowStyle = styles[params?.style?.toString()] as CellStyle
+//        currentRowStyle = params?.style && styles[params?.style?.toString()]
+//        if (params?.style && styles[params?.style?.toString()])
+//            currentRow.rowStyle = styles[params?.style?.toString()] as CellStyle
         if (params?.height)
             currentRow.heightInPoints = params.height
         currentCellIndex = -1
@@ -99,6 +102,7 @@ class ExcelBuilder {
             closure()
         }
         currentRow = null
+        currentRowStyle = null
         this
     }
 
@@ -109,16 +113,20 @@ class ExcelBuilder {
     def cell(Map params = null, Closure closure = null) {
         currentCellIndex++
         currentCell = currentRow.createCell(currentCellIndex) as Cell
+        currentCellStyle = params?.style && styles[params?.style?.toString()]
         if (params?.rowspan || params?.colspan)
             createMergeRegion(params.rowspan, params.colspan)
-        if (params?.style && styles[params?.style?.toString()])
-            currentCell.cellStyle = styles[params?.style?.toString()] as CellStyle
+        if (currentCellStyle)
+            currentCell.cellStyle = currentCellStyle as CellStyle
+        else if(currentRowStyle)
+            currentCell.cellStyle = currentRowStyle as CellStyle
         if (closure) {
             closure.delegate = this
             def v = closure()
             currentCell.setCellValue "$v"
         }
         currentCell = null
+        currentCellStyle = null
         this
     }
 

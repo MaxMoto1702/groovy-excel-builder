@@ -1,5 +1,7 @@
 package maxmoto1702.excel
 
+import org.apache.poi.xssf.streaming.SXSSFWorkbook
+
 import static maxmoto1702.excel.ExcelBuilderFactory.Style.*
 
 class SampleExcelBuild {
@@ -55,7 +57,7 @@ class SampleExcelBuild {
                 row { /* dummy */ }
             }
             sheet(name: "Demo config height and width", widthColumns: ['default', 25, 30]) {
-                row(height: 10) {
+                row(height: 30) {
                     cell {
                         "this row has height 30 and default width"
                     }
@@ -110,5 +112,11 @@ class SampleExcelBuild {
                 }
             }
         }
+        def file = new File("/tmp/${System.currentTimeMillis()}.xlsx")
+        def out = new FileOutputStream(file)
+        workbook.write(out);
+        workbook.close();
+        ((SXSSFWorkbook) workbook).dispose();
+        println file
     }
 }
