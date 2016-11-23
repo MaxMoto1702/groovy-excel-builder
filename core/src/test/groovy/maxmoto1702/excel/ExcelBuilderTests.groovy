@@ -1,11 +1,14 @@
 package maxmoto1702.excel
 
-import org.junit.Test
+import spock.lang.*
 
-class ExcelBuilderTests {
-    @Test
-    void "test types"() {
+class ExcelBuilderTests extends Specification {
+
+    def "test types"() {
+        setup:
         def builder = new ExcelBuilder()
+
+        when:
         builder.build {
             sheet(name: "Demo types") {
                 row {
@@ -26,11 +29,16 @@ class ExcelBuilderTests {
                 }
             }
         }
+
+        then:
+        1 == 1
     }
 
-    @Test
-    void "test styles"() {
+    def "test styles"() {
+        setup:
         def builder = new ExcelBuilder()
+
+        when:
         builder.config {
             style('commonStyle') { cellStyle ->
                 cellStyle
@@ -54,11 +62,16 @@ class ExcelBuilderTests {
                 }
             }
         }
+
+        then:
+        1 == 1
     }
 
-    @Test
-    void "test spans"() {
+    def "test spans"() {
+        setup:
         def builder = new ExcelBuilder()
+
+        when:
         builder.build {
             sheet(name: "Demo spans") {
                 row {
@@ -77,11 +90,16 @@ class ExcelBuilderTests {
                 row { /* dummy */ }
             }
         }
+
+        then:
+        1 == 1
     }
 
-    @Test
-    void "test config height and width"() {
+    def "test config height and width"() {
+        setup:
         def builder = new ExcelBuilder()
+
+        when:
         builder.build {
             sheet(name: "Demo config height and width", widthColumns: ['default', 25, 30]) {
                 row(height: 10) {
@@ -100,11 +118,16 @@ class ExcelBuilderTests {
                 }
             }
         }
+
+        then:
+        1 == 1
     }
 
-    @Test
-    void "test dynamic data"() {
+    def "test dynamic data"() {
+        setup:
         def builder = new ExcelBuilder()
+
+        when:
         builder.build {
             sheet(name: "Demo dynamic data", widthColumns: [12, 12]) {
                 def data1 = [
@@ -146,11 +169,16 @@ class ExcelBuilderTests {
                 }
             }
         }
+
+        then:
+        1 == 1
     }
 
-    @Test
-    void "test some sheets"() {
+    def "test some sheets"() {
+        setup:
         def builder = new ExcelBuilder()
+
+        when:
         builder.build {
             sheet(name: "Demo sheet 1") {
             }
@@ -159,5 +187,8 @@ class ExcelBuilderTests {
             sheet(name: "Demo sheet 3") {
             }
         }
+
+        then:
+        1 == 1
     }
 }
