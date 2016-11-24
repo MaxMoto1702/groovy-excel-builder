@@ -118,12 +118,36 @@ class ExcelBuilder {
             createMergeRegion(params.rowspan, params.colspan)
         if (currentCellStyle)
             currentCell.cellStyle = currentCellStyle as CellStyle
-        else if(currentRowStyle)
+        else if (currentRowStyle)
             currentCell.cellStyle = currentRowStyle as CellStyle
         if (closure) {
             closure.delegate = this
-            def v = closure()
-            currentCell.setCellValue "$v"
+            def value = closure()
+            switch (value?.class) {
+                case Short:
+                case Integer:
+                case Long:
+                case Float:
+                case Double:
+                case BigDecimal:
+                    currentCell.setCellValue(value as Double)
+                    break
+                case String:
+                    currentCell.setCellValue(value as String)
+                    break
+                case Calendar:
+                    currentCell.setCellValue(value as Calendar)
+                    break
+                case Date:
+                    if (value.time > 0)
+                        currentCell.setCellValue(value as Date)
+                    else
+                        currentCell.setCellValue ""
+                    break
+                default:
+                    log.warn("Can not determine type of value because value write as string to cell")
+                    currentCell.setCellValue "$value"
+            }
         }
         currentCell = null
         currentCellStyle = null

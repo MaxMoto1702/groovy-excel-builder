@@ -7,9 +7,10 @@ class ExcelBuilderTests extends Specification {
     def "test types"() {
         setup:
         def builder = new ExcelBuilder()
+        def date = new Date()
 
         when:
-        builder.build {
+        def workbook = builder.build {
             sheet(name: "Demo types") {
                 row {
                     cell {
@@ -21,7 +22,7 @@ class ExcelBuilderTests extends Specification {
                     }
                     cell {
                         // date value
-                        new Date()
+                        date
                     }
                     cell {
                         "dyna" + "mic"
@@ -31,7 +32,11 @@ class ExcelBuilderTests extends Specification {
         }
 
         then:
-        1 == 1
+        workbook.getSheet("Demo types") != null
+        workbook.getSheet("Demo types").getRow(0) != null
+        workbook.getSheet("Demo types").getRow(0).getCell(0)?.stringCellValue == "string value"
+        workbook.getSheet("Demo types").getRow(0).getCell(1)?.numericCellValue == 1
+        workbook.getSheet("Demo types").getRow(0).getCell(2)?.dateCellValue == date
     }
 
     def "test styles"() {
