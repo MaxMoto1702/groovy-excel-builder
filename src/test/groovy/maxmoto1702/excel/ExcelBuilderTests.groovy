@@ -110,7 +110,7 @@ class ExcelBuilderTests extends Specification {
         }
 
         then:
-        1 == 1
+        false
     }
 
     def "test config height and width"() {
@@ -138,7 +138,7 @@ class ExcelBuilderTests extends Specification {
         }
 
         then:
-        1 == 1
+        false
     }
 
     def "test dynamic data"() {
@@ -189,7 +189,7 @@ class ExcelBuilderTests extends Specification {
         }
 
         then:
-        1 == 1
+        false
     }
 
     def "test some sheets"() {
@@ -207,6 +207,6 @@ class ExcelBuilderTests extends Specification {
         }
 
         then:
-        1 == 1
+        false
     }
 }
