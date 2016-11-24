@@ -1,11 +1,6 @@
 package maxmoto1702.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
-import org.apache.poi.ss.usermodel.IndexedColors
-import org.apache.poi.ss.usermodel.Row
-import org.apache.poi.ss.usermodel.Sheet
-import org.apache.poi.ss.usermodel.Workbook
-import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import spock.lang.*
 
 class ExcelBuilderTests extends Specification {

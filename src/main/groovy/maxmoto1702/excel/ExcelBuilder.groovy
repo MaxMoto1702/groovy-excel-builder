@@ -98,8 +98,6 @@ class ExcelBuilder {
         currentRowIndex++
         currentRow = currentSheet.createRow(currentRowIndex) as Row
         currentRowStyle = styles[params?.style?.toString()]
-//        if (params?.style && styles[params?.style?.toString()])
-//            currentRow.rowStyle = styles[params?.style?.toString()] as CellStyle
         if (params?.height)
             currentRow.heightInPoints = params.height
         currentCellIndex = -1
