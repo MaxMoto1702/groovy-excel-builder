@@ -13,11 +13,9 @@ dependencies {
 }
 ```
 
-## Build excel use closures
+## Demo types
 
-### Demo types
-
-#### Code
+### Code
 
 ```groovy
 builder.build {
@@ -42,13 +40,13 @@ builder.build {
 }
 ```
 
-#### Result
+### Result
 
 ![Demo types](example-1.png)
 
-### Demo styles
+## Demo styles
 
-#### Code
+### Code
 
 ```groovy
 builder.config {
@@ -79,13 +77,13 @@ builder.build {
 }
 ```
 
-#### Result
+### Result
 
 ![Demo types](example-2.png)
 
-### Demo spans
+## Demo spans
 
-#### Code
+### Code
 
 ```groovy
 builder.build {
@@ -107,13 +105,13 @@ builder.build {
 }
 ```
 
-#### Result
+### Result
 
 ![Demo types](example-3.png)
 
-### Demo config height and width
+## Demo config height and width
 
-#### Code
+### Code
 
 ```groovy
 builder.build {
@@ -136,13 +134,13 @@ builder.build {
 }
 ```
 
-#### Result
+### Result
 
 ![Demo types](example-4.png)
 
-### Demo dynamic data
+## Demo dynamic data
 
-#### Code
+### Code
 
 ```groovy
 builder.build {
@@ -188,6 +186,6 @@ builder.build {
 }
 ```
 
-#### Result
+### Result
 
 ![Demo Demo dynamic data](example-5.png)
