@@ -1,11 +1,30 @@
 # Excel Builder
 
-## TODO Features
+## Install
+
+```groovy
+repositories {
+    maven {
+        url "http://repo.serebryanskiy.site/"
+    }
+}
+dependencies {
+    compile 'maxmoto1702:excel-builder:0.1'
+
+    testCompile 'junit:junit:4.12'
+}
+```
 
 ### Configure builder
 
 ```groovy
-
+builder.config {
+    style(Style.FIRST_STYLE) { CellStyle cellStyle ->
+        cellStyle.alignment = CellStyle.ALIGN_CENTER
+        cellStyle.borderBottom = CellStyle.BORDER_DASH_DOT
+        cellStyle
+    }
+}
 ```
 
 ### Build excel use closures

@@ -17,5 +17,3 @@ include 'services:webservice'
 */
 
 rootProject.name = 'excel-builder'
-include 'core'
-include 'sample'
