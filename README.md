@@ -10,8 +10,6 @@ repositories {
 }
 dependencies {
     compile 'maxmoto1702:excel-builder:0.1'
-
-    testCompile 'junit:junit:4.12'
 }
 ```
 
