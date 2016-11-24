@@ -1,5 +1,11 @@
 package maxmoto1702.excel
 
+import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.IndexedColors
+import org.apache.poi.ss.usermodel.Row
+import org.apache.poi.ss.usermodel.Sheet
+import org.apache.poi.ss.usermodel.Workbook
+import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import spock.lang.*
 
 class ExcelBuilderTests extends Specification {
@@ -37,6 +43,7 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheet("Demo types").getRow(0).getCell(0)?.stringCellValue == "string value"
         workbook.getSheet("Demo types").getRow(0).getCell(1)?.numericCellValue == 1
         workbook.getSheet("Demo types").getRow(0).getCell(2)?.dateCellValue == date
+        workbook.getSheet("Demo types").getRow(0).getCell(3)?.stringCellValue == "dynamic"
     }
 
     def "test styles"() {
@@ -46,13 +53,17 @@ class ExcelBuilderTests extends Specification {
         when:
         builder.config {
             style('commonStyle') { cellStyle ->
+                cellStyle.alignment = CellStyle.ALIGN_CENTER
+                cellStyle.borderBottom = CellStyle.BORDER_DASH_DOT
                 cellStyle
             }
             style('customStyle') { cellStyle ->
+                cellStyle.alignment = CellStyle.ALIGN_LEFT
+                cellStyle.borderTop = CellStyle.BORDER_DOUBLE
                 cellStyle
             }
         }
-        builder.build {
+        def workbook = builder.build {
             sheet(name: "Demo styles") {
                 row(style: 'commonStyle') {
                     cell {
@@ -69,7 +80,14 @@ class ExcelBuilderTests extends Specification {
         }
 
         then:
-        1 == 1
+        workbook.getSheet("Demo styles") != null
+        workbook.getSheet("Demo styles").getRow(0) != null
+        workbook.getSheet("Demo styles").getRow(0).getCell(0).getCellStyle().alignment == CellStyle.ALIGN_CENTER
+        workbook.getSheet("Demo styles").getRow(0).getCell(0).getCellStyle().borderBottom == CellStyle.BORDER_DASH_DOT
+        workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.alignment == CellStyle.ALIGN_CENTER
+        workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.borderBottom == CellStyle.BORDER_DASH_DOT
+        workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.alignment == CellStyle.ALIGN_LEFT
+        workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.borderTop == CellStyle.BORDER_DOUBLE
     }
 
     def "test spans"() {

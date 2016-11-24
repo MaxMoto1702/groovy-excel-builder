@@ -26,8 +26,10 @@ class ExcelBuilder {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     def config(Closure closure) {
+        log.debug "Start config builder"
         closure.delegate = this
         closure()
+        log.debug "Finish config builder"
         this
     }
 
@@ -37,6 +39,7 @@ class ExcelBuilder {
     }
 
     def style(style, Closure closure) {
+        log.debug "Create style with name: ${style?.toString()}"
         if (!style) {
             log.error('Style is null')
         }
@@ -55,11 +58,13 @@ class ExcelBuilder {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     def build(Closure closure) {
+        log.debug "Start build workbook"
         if (!workbook) {
             log.error('Workbook is null')
         }
         closure.delegate = this
         closure()
+        log.debug "Finish build workbook"
         workbook
     }
 
@@ -68,9 +73,9 @@ class ExcelBuilder {
     }
 
     def sheet(Map params = null, Closure closure = null) {
+        log.debug "Create sheet with params: $params"
         closure.delegate = this
         def sheetName = params?.name ?: generateSheetName()
-        log.debug "Create sheet with name '$sheetName"
         currentSheet = workbook.getSheet(sheetName) ?: workbook.createSheet(sheetName)
         if (params?.widthColumns) {
             params?.widthColumns?.eachWithIndex { width, idx ->
@@ -89,9 +94,10 @@ class ExcelBuilder {
     }
 
     def row(Map params = null, Closure closure = null) {
+        log.debug "Create row with params: $params"
         currentRowIndex++
         currentRow = currentSheet.createRow(currentRowIndex) as Row
-//        currentRowStyle = params?.style && styles[params?.style?.toString()]
+        currentRowStyle = styles[params?.style?.toString()]
 //        if (params?.style && styles[params?.style?.toString()])
 //            currentRow.rowStyle = styles[params?.style?.toString()] as CellStyle
         if (params?.height)
@@ -111,18 +117,23 @@ class ExcelBuilder {
     }
 
     def cell(Map params = null, Closure closure = null) {
+        log.debug "Create cell with params: $params"
         currentCellIndex++
         currentCell = currentRow.createCell(currentCellIndex) as Cell
-        currentCellStyle = params?.style && styles[params?.style?.toString()]
+        currentCellStyle = styles[params?.style?.toString()]
         if (params?.rowspan || params?.colspan)
             createMergeRegion(params.rowspan, params.colspan)
-        if (currentCellStyle)
-            currentCell.cellStyle = currentCellStyle as CellStyle
-        else if (currentRowStyle)
-            currentCell.cellStyle = currentRowStyle as CellStyle
+        if (currentCellStyle) {
+            log.debug "Apply cell style to current cell"
+            currentCell.setCellStyle(currentCellStyle as CellStyle)
+        } else if (currentRowStyle) {
+            log.debug "Apply row style to current cell"
+            currentCell.setCellStyle(currentRowStyle as CellStyle)
+        }
         if (closure) {
             closure.delegate = this
             def value = closure()
+            log.debug "Set cell value: $value"
             switch (value?.class) {
                 case Short:
                 case Integer:
@@ -159,6 +170,7 @@ class ExcelBuilder {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     private def createMergeRegion(rowspan, colspan) {
+        log.debug "Create merge region : $rowspan, $colspan"
         currentSheet.addMergedRegion(new CellRangeAddress(
                 currentRowIndex as Integer,
                 currentRowIndex + (rowspan ?: 1) - 1 as Integer,
@@ -168,6 +180,7 @@ class ExcelBuilder {
     }
 
     private String generateSheetName() {
-        "Sheet $workbook.numberOfSheets"
+        def generatedSheetName = "Sheet $workbook.numberOfSheets"
+        log.debug "Generated sheet name: $generatedSheetName"
     }
 }
