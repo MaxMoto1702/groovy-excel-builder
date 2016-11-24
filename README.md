@@ -13,21 +13,11 @@ dependencies {
 }
 ```
 
-### Configure builder
+## Build excel use closures
 
-```groovy
-builder.config {
-    style(Style.FIRST_STYLE) { CellStyle cellStyle ->
-        cellStyle.alignment = CellStyle.ALIGN_CENTER
-        cellStyle.borderBottom = CellStyle.BORDER_DASH_DOT
-        cellStyle
-    }
-}
-```
+### Demo types
 
-### Build excel use closures
-
-#### Example code
+#### Code
 
 ```groovy
 builder.build {
@@ -49,19 +39,56 @@ builder.build {
             }
         }
     }
+}
+```
+
+#### Result
+
+![Demo types](example-1.png)
+
+### Demo styles
+
+#### Code
+
+```groovy
+builder.config {
+    style("FIRST_STYLE") { CellStyle cellStyle ->
+        cellStyle.alignment = CellStyle.ALIGN_CENTER
+        cellStyle.borderBottom = CellStyle.BORDER_DASH_DOT
+        cellStyle
+    }
+    style("SECOND_STYLE") { CellStyle cellStyle ->
+        cellStyle.alignment = CellStyle.ALIGN_CENTER
+        cellStyle
+    }
+}
+builder.build {
     sheet(name: "Demo styles") {
-        row(style: rowStyle) {
+        row(style: "FIRST_STYLE") {
             cell {
                 "this cell has row style"
             }
             cell {
                 "this cell has row style"
             }
-            cell(style: cellStyle) {
+            cell(style: "SECOND_STYLE") {
                 "this cell has row style and cell style"
             }
         }
     }
+}
+```
+
+#### Result
+
+![Demo types](example-2.png)
+
+### Demo spans
+
+#### Code
+
+```groovy
+builder.build {
     sheet(name: "Demo spans") {
         row {
             cell(colspan: 2) {
@@ -77,6 +104,19 @@ builder.build {
         // this row not necessary, this row show only dummy-row
         row { /* dummy */ }
     }
+}
+```
+
+#### Result
+
+![Demo types](example-3.png)
+
+### Demo config height and width
+
+#### Code
+
+```groovy
+builder.build {
     sheet(name: "Demo config height and width", widthColumns: ['default', 25, 30]) {
         row(height: 10) {
             cell {
@@ -93,6 +133,19 @@ builder.build {
             }
         }
     }
+}
+```
+
+#### Result
+
+![Demo types](example-4.png)
+
+### Demo dynamic data
+
+#### Code
+
+```groovy
+builder.build {
     sheet(name: "Demo dynamic data", widthColumns: [12, 12]) {
         def data1 = [
             ["value 1", "value 2"],
@@ -135,9 +188,6 @@ builder.build {
 }
 ```
 
-#### Example results
-![Demo types](example-1.png)
-![Demo styles](example-2.png)
-![Demo spans](example-3.png)
-![Demo config height and width](example-4.png)
+#### Result
+
 ![Demo Demo dynamic data](example-5.png)
