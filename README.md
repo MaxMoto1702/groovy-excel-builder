@@ -26,7 +26,7 @@ repositories {
 
 ```groovy
 dependencies {
-    compile 'maxmoto1702:excel-builder:0.1'
+    compile 'maxmoto1702:excel-builder:1.0-RC1'
 }
 ```
 
