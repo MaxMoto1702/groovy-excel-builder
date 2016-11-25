@@ -1,4 +1,4 @@
-version '0.1'
+version '1.0-RC1'
 group 'maxmoto1702'
 
 apply plugin: 'groovy'
