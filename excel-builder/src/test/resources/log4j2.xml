@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+    <Properties>
+        <Property name="log-path">/tmp/logs</Property>
+    </Properties>
+
+    <Appenders>
+        <Console name="STDOUT" target="SYSTEM_OUT">
+            <PatternLayout pattern="%-5p --- %d{ISO8601} --- %-50c --- %m%n"/>
+        </Console>
+
+        <RollingFile name="ROLLING" fileName="${log-path}/excel-builder-tests.log" filePattern="${log-path}/excel-builder-tests.log.%d{yyyy-MM-dd}.%i.gz">
+            <PatternLayout pattern="%-5p %-23d{ISO8601} [%-10t] %x: %c{2} - %m%n"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="25 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="9999"/>
+        </RollingFile>
+    </Appenders>
+    <Loggers>
+        <Logger name="maxmoto1702" level="debug">
+            <AppenderRef ref="ROLLING" />
+        </Logger>
+
+        <Root level="error">
+            <AppenderRef ref="STDOUT" />
+        </Root>
+    </Loggers>
+</Configuration>
