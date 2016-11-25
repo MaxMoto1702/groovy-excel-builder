@@ -6,7 +6,9 @@ Excel Builder позволяет просто и быстро строить Exc
 
 Excel Builder разработан для использования в Java и Groovy.
 
-Excel Builder делает код постороения таблицы простым, прозрачным и читаемым. 
+Excel Builder делает код постороения таблицы простым, прозрачным и читаемым.
+ 
+Excel Builder это обертка над [Apache POI](https://github.com/apache/poi).
 
 ## Install
 
