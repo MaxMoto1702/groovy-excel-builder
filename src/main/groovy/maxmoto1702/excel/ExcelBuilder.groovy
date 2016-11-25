@@ -186,5 +186,6 @@ class ExcelBuilder {
     private String generateSheetName() {
         def generatedSheetName = "Sheet $workbook.numberOfSheets"
         log.debug "Generated sheet name: $generatedSheetName"
+        generatedSheetName
     }
 }

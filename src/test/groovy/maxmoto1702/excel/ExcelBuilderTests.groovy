@@ -1,6 +1,7 @@
 package maxmoto1702.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import spock.lang.*
 
 class ExcelBuilderTests extends Specification {
@@ -257,21 +258,23 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheet("Demo dynamic data").getMergedRegion(0).formatAsString() == "A8:B8"
     }
 
-    def "test some sheets"() {
+    def "test several sheets"() {
         setup:
         def builder = new ExcelBuilder()
 
         when:
-        builder.build {
-            sheet(name: "Demo sheet 1") {
+        def workbook = builder.build {
+            sheet() {
             }
-            sheet(name: "Demo sheet 2") {
+            sheet() {
             }
-            sheet(name: "Demo sheet 3") {
+            sheet() {
             }
         }
 
         then:
-        false
+        workbook.getSheetAt(0) != null
+        workbook.getSheetAt(1) != null
+        workbook.getSheetAt(2) != null
     }
 }
