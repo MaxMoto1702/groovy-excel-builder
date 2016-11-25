@@ -1,6 +1,14 @@
 # Excel Builder
 
+## Introduction
+
+Excel Builder позволяет просто и быстро строить Excel таблицы. 
+Excel Builder разработан для использования в Java и Groovy.
+Excel Builder делает код постороения таблицы простым, прозрачным и читаемым. 
+
 ## Install
+
+1. Добавьте репозиторий в gradle проект:
 
 ```groovy
 repositories {
@@ -8,14 +16,19 @@ repositories {
         url "http://repo.serebryanskiy.site/"
     }
 }
+```
+
+2. Добавьте библиотеку в зависимости проекта:
+
+```groovy
 dependencies {
     compile 'maxmoto1702:excel-builder:0.1'
 }
 ```
 
-## Demo types
+## Examples
 
-### Code
+1. Demo types
 
 ```groovy
 builder.build {
@@ -40,13 +53,9 @@ builder.build {
 }
 ```
 
-### Result
-
 ![Demo types](example-1.png)
 
-## Demo styles
-
-### Code
+2. Demo styles
 
 ```groovy
 builder.config {
@@ -77,13 +86,9 @@ builder.build {
 }
 ```
 
-### Result
-
 ![Demo types](example-2.png)
 
-## Demo spans
-
-### Code
+3. Demo spans
 
 ```groovy
 builder.build {
@@ -105,13 +110,9 @@ builder.build {
 }
 ```
 
-### Result
-
 ![Demo types](example-3.png)
 
-## Demo config height and width
-
-### Code
+4. Demo config height and width
 
 ```groovy
 builder.build {
@@ -134,13 +135,9 @@ builder.build {
 }
 ```
 
-### Result
-
 ![Demo types](example-4.png)
 
-## Demo dynamic data
-
-### Code
+5. Demo dynamic data
 
 ```groovy
 builder.build {
@@ -185,7 +182,5 @@ builder.build {
     }
 }
 ```
-
-### Result
 
 ![Demo Demo dynamic data](example-5.png)
