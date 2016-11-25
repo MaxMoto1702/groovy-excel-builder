@@ -1,7 +1,6 @@
 package maxmoto1702.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
-import org.apache.poi.xssf.streaming.SXSSFWorkbook
 import spock.lang.*
 
 class ExcelBuilderTests extends Specification {
@@ -246,11 +245,11 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheet("Demo dynamic data").getRow(5).getCell(0).stringCellValue == "row 2 value 2"
         workbook.getSheet("Demo dynamic data").getRow(5).getCell(1) != null
         workbook.getSheet("Demo dynamic data").getRow(5).getCell(1).stringCellValue == "row 2 value 1"
-        workbook.getSheet("Demo dynamic data").getRow(5) != null
-        workbook.getSheet("Demo dynamic data").getRow(5).getCell(0) != null
-        workbook.getSheet("Demo dynamic data").getRow(5).getCell(0).stringCellValue == "row 3 value 2"
-        workbook.getSheet("Demo dynamic data").getRow(5).getCell(1) != null
-        workbook.getSheet("Demo dynamic data").getRow(5).getCell(1).stringCellValue == "row 3 value 1"
+        workbook.getSheet("Demo dynamic data").getRow(6) != null
+        workbook.getSheet("Demo dynamic data").getRow(6).getCell(0) != null
+        workbook.getSheet("Demo dynamic data").getRow(6).getCell(0).stringCellValue == "row 3 value 2"
+        workbook.getSheet("Demo dynamic data").getRow(6).getCell(1) != null
+        workbook.getSheet("Demo dynamic data").getRow(6).getCell(1).stringCellValue == "row 3 value 1"
         workbook.getSheet("Demo dynamic data").getRow(7) != null
         workbook.getSheet("Demo dynamic data").getRow(7).getCell(0) != null
         workbook.getSheet("Demo dynamic data").getRow(7).getCell(0).stringCellValue == "row 4 value 2"
