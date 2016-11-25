@@ -71,7 +71,7 @@ builder.build {
 }
 ```
 
-![Demo types](example-1.png)
+![Demo types](src/docs/images/example-1.png)
 
 ### Demo styles
 
@@ -104,7 +104,7 @@ builder.build {
 }
 ```
 
-![Demo types](example-2.png)
+![Demo types](src/docs/images/example-2.png)
 
 ### Demo spans
 
@@ -128,7 +128,7 @@ builder.build {
 }
 ```
 
-![Demo types](example-3.png)
+![Demo types](src/docs/images/example-3.png)
 
 ### Demo config height and width
 
@@ -153,7 +153,7 @@ builder.build {
 }
 ```
 
-![Demo types](example-4.png)
+![Demo types](src/docs/images/example-4.png)
 
 ### Demo dynamic data
 
@@ -201,4 +201,4 @@ builder.build {
 }
 ```
 
-![Demo Demo dynamic data](example-5.png)
+![Demo Demo dynamic data](src/docs/images/example-5.png)
