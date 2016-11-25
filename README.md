@@ -28,6 +28,14 @@ dependencies {
 }
 ```
 
+## Features
+
+1. Конфигурирование билдера: `builder.config { ... }`.
+2. Добавление стилей в книгу: `style('style name') { cellStyle -> ... }`.
+3. Создание листа: `sheet(name: 'Лист 1', widthColumns: ['default', 25, ...]) { ... }`.
+4. Создание строки: `row(style: 'style name', height: 10)`.
+6. Создание ячейки: `cell(rowspan: 1, colspan: 1, style: 'style name') { ... }`.
+
 ## Examples
 
 ### Demo types
@@ -99,7 +107,7 @@ builder.build {
             cell(colspan: 2) {
                 "cell has width 2 columns"
             }
-            cell(rowspan: 2, style: wrap, width: 12) {
+            cell(rowspan: 2, style: wrap) {
                 "cell has height 2 rows"
             }
             cell(colspan: 2, rowspan: 2, style: wrap) {
