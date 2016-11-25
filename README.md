@@ -12,21 +12,21 @@ Excel Builder делает код постороения таблицы прос
 
 Добавьте репозиторий в gradle проект:
 
-    ```groovy
-    repositories {
-        maven {
-            url "http://repo.serebryanskiy.site/"
-        }
+```groovy
+repositories {
+    maven {
+        url "http://repo.serebryanskiy.site/"
     }
-    ```
+}
+```
 
 Добавьте библиотеку в зависимости проекта:
 
-    ```groovy
-    dependencies {
-        compile 'maxmoto1702:excel-builder:0.1'
-    }
-    ```
+```groovy
+dependencies {
+    compile 'maxmoto1702:excel-builder:0.1'
+}
+```
 
 ## Examples
 
