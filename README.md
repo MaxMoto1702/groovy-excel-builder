@@ -39,6 +39,11 @@ dependencies {
 5. Создание ячейки: `cell(rowspan: 1, colspan: 1, style: 'style name') { ... }`.
 6. Создание книги: `builder.build { ... }`.
 
+## TODO
+
+1. Спрятать использование apache poi стилей и шрифтов под капот
+2. Добавить наследование стилей
+
 ## Examples
 
 ### Demo types
