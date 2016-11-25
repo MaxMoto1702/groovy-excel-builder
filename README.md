@@ -30,7 +30,7 @@ dependencies {
 
 ## Examples
 
-1. Demo types
+### Demo types
 
 ```groovy
 builder.build {
@@ -57,7 +57,7 @@ builder.build {
 
 ![Demo types](example-1.png)
 
-2. Demo styles
+### Demo styles
 
 ```groovy
 builder.config {
@@ -90,7 +90,7 @@ builder.build {
 
 ![Demo types](example-2.png)
 
-3. Demo spans
+### Demo spans
 
 ```groovy
 builder.build {
@@ -114,7 +114,7 @@ builder.build {
 
 ![Demo types](example-3.png)
 
-4. Demo config height and width
+### Demo config height and width
 
 ```groovy
 builder.build {
@@ -139,7 +139,7 @@ builder.build {
 
 ![Demo types](example-4.png)
 
-5. Demo dynamic data
+### Demo dynamic data
 
 ```groovy
 builder.build {
