@@ -120,7 +120,7 @@ class ExcelBuilder {
         currentCell = currentRow.createCell(currentCellIndex) as Cell
         currentCellStyle = styles[params?.style?.toString()]
         if (params?.rowspan || params?.colspan)
-            createMergeRegion(params.rowspan, params.colspan)
+            createMergeRegion(params)
         if (currentCellStyle) {
             log.debug "Apply cell style to current cell"
             currentCell.setCellStyle(currentCellStyle as CellStyle)
@@ -167,13 +167,19 @@ class ExcelBuilder {
 // UTILS ///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private def createMergeRegion(rowspan, colspan) {
+    private def createMergeRegion(params) {
+        def rowspan = params?.rowspan ?: 1
+        def colspan = params?.colspan ?: 1
         log.debug "Create merge region : $rowspan, $colspan"
+        if (rowspan == 1 && colspan == 1) {
+            log.warn "Merge region $rowspan x $colspan not create!"
+            return
+        }
         currentSheet.addMergedRegion(new CellRangeAddress(
                 currentRowIndex as Integer,
-                currentRowIndex + (rowspan ?: 1) - 1 as Integer,
+                currentRowIndex + rowspan - 1 as Integer,
                 currentCellIndex as Integer,
-                currentCellIndex + (colspan ?: 1) - 1 as Integer
+                currentCellIndex + colspan - 1 as Integer
         ))
     }
 
