@@ -35,6 +35,7 @@ dependencies {
 3. Создание листа: `sheet(name: 'Лист 1', widthColumns: ['default', 25, ...]) { ... }`.
 4. Создание строки: `row(style: 'style name', height: 10)`.
 6. Создание ячейки: `cell(rowspan: 1, colspan: 1, style: 'style name') { ... }`.
+7. Создание книги: `builder.build { ... }`.
 
 ## Examples
 
