@@ -1,0 +1,58 @@
+[[start]]
+== Getting Started
+
+=== Installation
+
+To get started using this great module, include it into your build:
+
+[source,xml]
+.Maven
+----
+<dependency>
+    <groupId>{groupId}</groupId>
+    <artifactId>{artifactId}</artifactId>
+    <version>{version}</version>
+</dependency>
+----
+
+[source,groovy]
+.Gradle
+----
+repositories {
+    maven {
+        url "http://repo.serebryanskiy.site/"
+    }
+}
+compile '{groupId}:{artifactId}:{version}'
+----
+
+=== Creating your first Excel document
+
+Here is the simplest example to create an Excel document:
+
+[source,groovy]
+----
+def workbook = new ExcelBuilder().build {
+    sheet {
+        row {
+            cell {
+                "test"
+            }
+        }
+    }
+}
+
+workbook.write(someOutputStream)
+----
+
+NOTE: Groovy Excel Builder supports XLSX documents only, not the old XLS
+format and supports streaming version of Workbook (SXSSFWorkbook) only.
+
+As you might imagine from that example, a single sheet will be created with
+the value of "test" in cell `A1`.
+
+In addition to writing the excel document directly to an output stream, you
+can also just build the document and do what you want with it afterwards.
+
+The Groovy Excel Builder provides several options and features for creating
+documents. To learn more, continue on reading this documentation.
