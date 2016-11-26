@@ -1,3 +1,7 @@
+plugins {
+    id 'org.asciidoctor.gradle.asciidoctor' version '1.5.1'
+}
+
 version '1.0-RC1'
 group 'maxmoto1702'
 
@@ -22,6 +26,20 @@ dependencies {
     testCompile 'org.apache.logging.log4j:log4j-slf4j-impl:2.3'
     testCompile 'org.slf4j:jcl-over-slf4j:1.7.6'
     testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'
+}
+
+asciidoctor {
+    logDocuments = true
+    backends = [
+            'html5'
+    ]
+    attributes = [
+            'toc'      : 'left',
+            'sourceDir': "${projectDir}/src/main/groovy",
+            'version': project.version,
+            'groupId': project.group,
+            'artifactId': project.name,
+    ]
 }
 
 //uploadArchives {
