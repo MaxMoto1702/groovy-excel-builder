@@ -1,0 +1,45 @@
+[[sheet]]
+== Sheet
+
+With the Groovy Excel Builder, you can create documents with as many sheets
+as you like. In addition, there are several options you have at the sheet
+level for configuring your document.
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+    }
+}
+----
+
+=== Sheet Name
+
+You can configure what name you would like to give each sheet by executing
+the `sheet` method with a parameter `name: String`.
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet(name: "My Sheet") {
+    }
+}
+----
+
+=== Width columns
+
+You can configure defaults for column width in a given sheet by executing
+the `sheet` method with a parameter `widthColumns: List`.
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet(widthColumns: [10, 20, 30]) {
+    }
+    sheet(widthColumns: ['default', 20, 30]) {
+        // The first column will be the default width
+    }
+}
+----
+
+NOTE: For set the default width of column use the special value `'default'`.
