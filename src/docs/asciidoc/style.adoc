@@ -1,0 +1,30 @@
+[[styles]]
+== Styling Cells
+
+Styles in the builder set up similarly with classes in HTML. First,
+configure styles and then apply them to the rows or cells.
+
+Styles are configure via Apache POI API.
+
+[source,groovy]
+----
+def builder = new ExcelBuilder()
+
+builder.config {
+    style { CellStyle cellStyle ->
+        // Configure style using Apache POI API
+    }
+}
+
+builder.build {
+    sheet {
+        row {
+            cell {
+                "test"
+            }
+        }
+    }
+}
+
+workbook.write(someOutputStream)
+----
