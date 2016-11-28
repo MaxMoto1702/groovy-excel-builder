@@ -1,0 +1,41 @@
+[[rows]]
+== Rows
+
+In addition to creating cells, there are also a few other methods available
+to you to make documents easier.
+
+=== Creating Rows
+
+You can easily create rows with the following syntax:
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        //Empty row
+        row {
+        }
+
+        //Empty row
+        row()
+
+        //Empty row with height specified
+        row(height: 10) {
+        }
+    }
+}
+----
+
+=== Defaults
+
+You can apply default styling at the row level.
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        row(style: 'row-style') {
+        }
+    }
+}
+----
