@@ -1,0 +1,77 @@
+[[Cell]]
+== Cells
+
+=== Cell Values
+
+This module supports setting basic and custom types to cell values. The
+following types are supported out of the box:
+
+* String
+* Calendar
+* Date
+* Number
+* Boolean
+
+=== Creating Rows
+
+You can easily create rows with the following syntax:
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        row {
+            // Empty cell
+            cell {
+            }
+
+            // Empty cell
+            cell()
+
+            cell {
+                "Text"
+            }
+        }
+    }
+}
+----
+
+=== Spans
+
+You can apply row or column spans to cell.
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        row {
+            cell(rowspan: 2) {
+                "This cell takes two lines"
+            }
+
+            cell(colspan: 2) {
+                "This cell takes two columns"
+            }
+        }
+    }
+}
+----
+
+NOTE: If spans will overlap each other, then when you open the
+Excel-file past will be deleted.
+
+=== Styles
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        row {
+            cell(style: 'cell-style') {
+            }
+        }
+    }
+}
+----
+
+NOTE: Style on cell level override style on level row&
