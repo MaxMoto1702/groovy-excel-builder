@@ -432,6 +432,20 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_width_columns">Width columns</a></li>
 </ul>
 </li>
+<li><a href="#row">Rows</a>
+<ul class="sectlevel2">
+<li><a href="#_creating_rows">Creating Rows</a></li>
+<li><a href="#_defaults">Defaults</a></li>
+</ul>
+</li>
+<li><a href="#Cell">Cells</a>
+<ul class="sectlevel2">
+<li><a href="#_cell_values">Cell Values</a></li>
+<li><a href="#_creating_rows_2">Creating Rows</a></li>
+<li><a href="#_spans">Spans</a></li>
+<li><a href="#_styles">Styles</a></li>
+</ul>
+</li>
 <li><a href="#styles">Styling Cells</a></li>
 </ul>
 </div>
@@ -596,6 +610,175 @@ For set the default width of column use the special value <code>'default'</code>
 </div>
 </div>
 <div class="sect1">
+<h2 id="row">Rows</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>In addition to creating cells, there are also a few other methods available
+to you to make documents easier.</p>
+</div>
+<div class="sect2">
+<h3 id="_creating_rows">Creating Rows</h3>
+<div class="paragraph">
+<p>You can easily create rows with the following syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+    sheet {
+        //Empty row
+        row {
+        }
+
+        //Empty row
+        row()
+
+        //Empty row with height specified
+        row(height: 10) {
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_defaults">Defaults</h3>
+<div class="paragraph">
+<p>You can apply default styling at the row level.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+    sheet {
+        row(style: 'row-style') {
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
+<h2 id="Cell">Cells</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_cell_values">Cell Values</h3>
+<div class="paragraph">
+<p>This module supports setting basic and custom types to cell values. The
+following types are supported out of the box:</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>String</p>
+</li>
+<li>
+<p>Calendar</p>
+</li>
+<li>
+<p>Date</p>
+</li>
+<li>
+<p>Number</p>
+</li>
+<li>
+<p>Boolean</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_creating_rows_2">Creating Rows</h3>
+<div class="paragraph">
+<p>You can easily create rows with the following syntax:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+    sheet {
+        row {
+            // Empty cell
+            cell {
+            }
+
+            // Empty cell
+            cell()
+
+            cell {
+                "Text"
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_spans">Spans</h3>
+<div class="paragraph">
+<p>You can apply row or column spans to cell.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+    sheet {
+        row {
+            cell(rowspan: 2) {
+                "This cell takes two lines"
+            }
+
+            cell(colspan: 2) {
+                "This cell takes two columns"
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+If spans will overlap each other, then when you open the
+Excel-file past will be deleted.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_styles">Styles</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+    sheet {
+        row {
+            cell(style: 'cell-style') {
+            }
+        }
+    }
+}</code></pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<div class="title">Note</div>
+</td>
+<td class="content">
+Style on cell level override style on level row&amp;
+</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="sect1">
 <h2 id="styles">Styling Cells</h2>
 <div class="sectionbody">
 <div class="paragraph">
@@ -633,7 +816,7 @@ workbook.write(someOutputStream)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-27 01:13:52 +04:00
+Last updated 2016-11-27 01:24:04 +04:00
 </div>
 </div>
 </body>
