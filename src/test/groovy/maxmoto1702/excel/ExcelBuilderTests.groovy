@@ -276,4 +276,63 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheetAt(1) != null
         workbook.getSheetAt(2) != null
     }
+
+    def "test skipping"() {
+        setup:
+        def builder = new ExcelBuilder()
+
+        when:
+        def workbook = builder.build {
+            sheet {
+                row {
+                    cell {
+                        'A'
+                    }
+                    skipCell()
+                    cell {
+                        'B'
+                    }
+                    skipCell(2)
+                    cell {
+                        'C'
+                    }
+                }
+                skipRow()
+                row {
+                    cell {
+                        'D'
+                    }
+                }
+                skipRow(2)
+                row {
+                    cell {
+                        'E'
+                    }
+                }
+            }
+        }
+
+        then:
+        workbook.getSheetAt(0) != null
+        workbook.getSheetAt(0).getRow(0) != null
+        workbook.getSheetAt(0).getRow(0).getCell(0) != null
+        workbook.getSheetAt(0).getRow(0).getCell(0).stringCellValue == 'A'
+        workbook.getSheetAt(0).getRow(0).getCell(1) != null
+        workbook.getSheetAt(0).getRow(0).getCell(2) != null
+        workbook.getSheetAt(0).getRow(0).getCell(2).stringCellValue == 'B'
+        workbook.getSheetAt(0).getRow(0).getCell(3) != null
+        workbook.getSheetAt(0).getRow(0).getCell(4) != null
+        workbook.getSheetAt(0).getRow(0).getCell(5) != null
+        workbook.getSheetAt(0).getRow(0).getCell(5).stringCellValue == 'C'
+        workbook.getSheetAt(0).getRow(1) != null
+        workbook.getSheetAt(0).getRow(2) != null
+        workbook.getSheetAt(0).getRow(2).getCell(0) != null
+        workbook.getSheetAt(0).getRow(2).getCell(0).stringCellValue == 'D'
+        workbook.getSheetAt(0).getRow(3) != null
+        workbook.getSheetAt(0).getRow(4) != null
+        workbook.getSheetAt(0).getRow(5) != null
+        workbook.getSheetAt(0).getRow(5).getCell(0) != null
+        workbook.getSheetAt(0).getRow(5).getCell(0).stringCellValue == 'E'
+    }
+
 }

@@ -36,6 +36,44 @@ ExcelBuilder.build {
 }
 ----
 
+=== Skipping Cells
+
+It is very easy to skip any number of cells. See the following example:
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        row {
+            cell {
+                'A'
+            }
+
+            skipCell()
+
+            cell {
+                'B'
+            }
+
+            skipCell(2)
+
+            cell {
+                'C'
+            }
+        }
+    }
+}
+----
+
+The above example will produce a sheet that looks something like this:
+
+[width="65",cols="1,4,4,4,4,4,4"]
+|=======
+|    |*A* |*B* |*C* |*D* |*E* |*F*
+
+|*1* |A   |    |B   |    |    |C
+|=======
+
 === Spans
 
 You can apply row or column spans to cell.

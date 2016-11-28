@@ -26,6 +26,53 @@ ExcelBuilder.build {
 }
 ----
 
+=== Skipping Rows
+
+It is very easy to skip any number of rows. See the following example:
+
+[source,groovy]
+----
+ExcelBuilder.build {
+    sheet {
+        row {
+            cell {
+                'A'
+            }
+        }
+
+        skipRow()
+
+        row {
+            cell {
+                'B'
+            }
+        }
+
+        skipRow(2)
+
+        row {
+            cell {
+                'C'
+            }
+        }
+    }
+}
+----
+
+The above example will produce a sheet that looks something like this:
+
+[width="15",cols="1,4"]
+|=======
+|    |*A*
+
+|*1* |A
+|*2* |
+|*3* |B
+|*4* |
+|*5* |
+|*6* |C
+|=======
+
 === Defaults
 
 You can apply default styling at the row level.
