@@ -1,4 +1,4 @@
-[[rows]]
+[[row]]
 == Rows
 
 In addition to creating cells, there are also a few other methods available
