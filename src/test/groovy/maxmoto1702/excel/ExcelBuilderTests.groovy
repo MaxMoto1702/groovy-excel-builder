@@ -226,6 +226,8 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheet("Demo spans").getRow(0).getCell(1) != null
         workbook.getSheet("Demo spans").getRow(0).getCell(2) != null
         workbook.getSheet("Demo spans").getRow(0).getCell(3) != null
+        workbook.getSheet("Demo spans").getRow(0).getCell(4) != null
+        workbook.getSheet("Demo spans").getRow(0).getCell(5) == null
         workbook.getSheet("Demo spans").getRow(1) != null
         workbook.getSheet("Demo spans").getRow(0).getCell(0) != null
         workbook.getSheet("Demo spans").getMergedRegion(0) != null

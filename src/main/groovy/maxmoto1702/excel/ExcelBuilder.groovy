@@ -171,7 +171,7 @@ class ExcelBuilder {
     def cell(Map params = null, Closure closure = null) {
         log.debug "Create cell with params: $params"
         currentCellIndex++
-        currentCell = currentRow.createCell(currentCellIndex) as Cell
+        currentCell = currentRow.getCell(currentCellIndex) ?: currentRow.createCell(currentCellIndex) as Cell
         currentCellStyle = styles[params?.style?.toString()]
         if (params?.rowspan || params?.colspan)
             createMergeRegion(params)
@@ -253,6 +253,11 @@ class ExcelBuilder {
                 currentCellIndex as Integer,
                 currentCellIndex + colspan - 1 as Integer
         ))
+        if (colspan > 1) {
+            (1..colspan - 1).each {
+                currentRow.createCell(currentCellIndex + it)
+            }
+        }
     }
 
     private String generateSheetName() {
