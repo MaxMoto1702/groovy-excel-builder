@@ -1,7 +1,7 @@
 [[styles]]
 == Styling Cells
 
-== Data format
+=== Data format
 
 Data format setting as string.
 
@@ -40,12 +40,12 @@ workbook.write(someOutputStream)
 
 NOTE: Format name can be any object. Example, simple enum value.
 
-== Font
+=== Font
 
 Fonts are configure via Apache POI API. See list of properties in class
 https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFFont.html[XSSFFont]
 
-=== Configure font in waterfall style
+==== Configure font in waterfall style
 
 [source,groovy]
 ----
@@ -75,7 +75,7 @@ workbook.write(someOutputStream)
 
 NOTE: Font name can be any object. Example, simple enum value.
 
-=== Configure font inline style
+==== Configure font inline style
 
 [source,groovy]
 ----
@@ -102,7 +102,7 @@ builder.build {
 workbook.write(someOutputStream)
 ----
 
-== Style
+=== Style
 
 Styles in the builder set up similarly with classes in HTML. First,
 configure styles and then apply them to the rows or cells.
