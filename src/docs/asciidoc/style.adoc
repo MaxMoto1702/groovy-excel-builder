@@ -1,6 +1,71 @@
 [[styles]]
 == Styling Cells
 
+== Font
+
+
+Fonts are configure via Apache POI API. See list of properties in class
+https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFFont.html[XSSFFont]
+
+=== Configure font in waterfall style
+
+[source,groovy]
+----
+def builder = new ExcelBuilder()
+
+builder.config {
+    font('configured font') { font ->
+        font.fontName = 'Arial'
+    }
+    style('style with configured font') { cellStyle ->
+        cellStyle.font = font('configured font')
+    }
+}
+
+builder.build {
+    sheet {
+        row {
+            cell(style: 'style with configured font') {
+                "test"
+            }
+        }
+    }
+}
+
+workbook.write(someOutputStream)
+----
+
+NOTE: Font name can be any object. Example, simple enum value.
+
+=== Configure font in simple (included) style
+
+[source,groovy]
+----
+def builder = new ExcelBuilder()
+
+builder.config {
+    style('style with configured font') { cellStyle ->
+        cellStyle.font = font('configured font') { font ->
+            font.fontName = 'Arial'
+        }
+    }
+}
+
+builder.build {
+    sheet {
+        row {
+            cell(style: 'style with configured font') {
+                "test"
+            }
+        }
+    }
+}
+
+workbook.write(someOutputStream)
+----
+
+=== Style
+
 Styles in the builder set up similarly with classes in HTML. First,
 configure styles and then apply them to the rows or cells.
 
@@ -34,3 +99,5 @@ builder.build {
 
 workbook.write(someOutputStream)
 ----
+
+NOTE: Style name can be any object. Example, simple enum value.

@@ -3,6 +3,7 @@ package maxmoto1702.excel
 import groovy.util.logging.Slf4j
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.Font
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.util.CellRangeAddress
 import org.apache.poi.xssf.streaming.SXSSFWorkbook
@@ -45,12 +46,27 @@ class ExcelBuilder {
         }
         closure.delegate = this
         def styleName = style.toString()
-        styles[styleName] = closure(workbook.createCellStyle())
+        def newStyle = workbook.createCellStyle()
+        closure(newStyle)
+        styles[styleName] = newStyle
+        newStyle
     }
 
-    def font(String name, Closure closure) {
+    def font(font) {
+        log.debug "Get font with name: $font"
+        if (!fonts[font]) {
+            log.error "Font ${font?.toString()} not found"
+        }
+        fonts[font]
+    }
+
+    def font(font, Closure closure) {
+        log.debug "Create font with name: $font"
         closure.delegate = this
-        fonts[name] = closure(workbook.createFont())
+        def newFont = workbook.createFont()
+        closure(newFont)
+        fonts[font] = newFont
+        newFont
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

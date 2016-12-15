@@ -1,6 +1,8 @@
 package maxmoto1702.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.xssf.usermodel.XSSFCellStyle
+import org.apache.poi.xssf.usermodel.XSSFFont
 import spock.lang.*
 
 class ExcelBuilderTests extends Specification {
@@ -50,12 +52,10 @@ class ExcelBuilderTests extends Specification {
             style('commonStyle') { cellStyle ->
                 cellStyle.alignment = CellStyle.ALIGN_CENTER
                 cellStyle.borderBottom = CellStyle.BORDER_DASH_DOT
-                cellStyle
             }
             style('customStyle') { cellStyle ->
                 cellStyle.alignment = CellStyle.ALIGN_LEFT
                 cellStyle.borderTop = CellStyle.BORDER_DOUBLE
-                cellStyle
             }
         }
         def workbook = builder.build {
@@ -83,6 +83,49 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.borderBottom == CellStyle.BORDER_DASH_DOT
         workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.alignment == CellStyle.ALIGN_LEFT
         workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.borderTop == CellStyle.BORDER_DOUBLE
+    }
+
+    def "test fonts"() {
+        setup:
+        def builder = new ExcelBuilder()
+
+        when:
+        builder.config {
+            font('waterfall configured font') { font ->
+                font.fontName = 'Arial'
+            }
+            style('style with waterfall configured font') { cellStyle ->
+                cellStyle.font = font('waterfall configured font')
+                cellStyle
+            }
+            style('style with included configured font') { cellStyle ->
+                cellStyle.font = font('included configured font') { font ->
+                    font.fontName = 'Arial'
+                }
+            }
+        }
+        def workbook = builder.build {
+            sheet {
+                row {
+                    cell(style: 'style with waterfall configured font') {
+                        'test waterfall configured font'
+                    }
+                    cell(style: 'style with included configured font') {
+                        'test included configured font'
+                    }
+                }
+            }
+        }
+
+        then:
+        workbook.getSheetAt(0) != null
+        workbook.getSheetAt(0).getRow(0) != null
+        workbook.getSheetAt(0).getRow(0).getCell(0) != null
+        workbook.getSheetAt(0).getRow(0).getCell(0).stringCellValue == 'test waterfall configured font'
+        (workbook.getSheetAt(0).getRow(0).getCell(0).cellStyle as XSSFCellStyle).font.fontName == 'Arial'
+        workbook.getSheetAt(0).getRow(0).getCell(1) != null
+        workbook.getSheetAt(0).getRow(0).getCell(1).stringCellValue == 'test included configured font'
+        (workbook.getSheetAt(0).getRow(0).getCell(1).cellStyle as XSSFCellStyle).font.fontName == 'Arial'
     }
 
     def "test spans"() {
