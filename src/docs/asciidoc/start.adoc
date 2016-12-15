@@ -87,7 +87,7 @@ def workbook = new ExcelBuilder().build {
 workbook.write(new FileOutputStream(new File('dynamic_data.xlsx')))
 ----
 
-.Content file 'sample.xlsx'
+.Content file 'dynamic_data.xlsx'
 [width="65",cols="1,4,4,4,4,4,4"]
 |=======
 |    |*A* |*B* |*C* |*D* |*E* |*F*
