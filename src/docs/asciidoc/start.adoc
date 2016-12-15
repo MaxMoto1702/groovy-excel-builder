@@ -5,7 +5,7 @@
 
 To get started using this great module, include it into your build:
 
-[source,xml]
+[source,xml,subs=attributes+]
 .Maven
 ----
 <dependency>
@@ -15,7 +15,7 @@ To get started using this great module, include it into your build:
 </dependency>
 ----
 
-[source,groovy]
+[source,groovy,subs=attributes+]
 .Gradle
 ----
 repositories {

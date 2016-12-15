@@ -36,10 +36,14 @@ asciidoctor {
     attributes = [
             'toc'      : 'left',
             'sourceDir': "${projectDir}/src/main/groovy",
-            'version': project.version,
-            'groupId': project.group,
-            'artifactId': project.name,
+            'version': "$project.version",
+            'groupId': "$project.group",
+            'artifactId': "$project.name",
     ]
+}
+
+task simple << {
+    println project.version
 }
 
 //uploadArchives {
