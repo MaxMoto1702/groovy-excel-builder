@@ -509,6 +509,11 @@ or if you have a great idea for improving this library, please
 compile 'maxmoto1702:excel-builder:1.0-RC1'</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>Or download
+<a href="http://repo.serebryanskiy.site/maxmoto1702/excel-builder/1.0-RC1/excel-builder-1.0-RC1.jar">library</a>
+and add to your project.</p>
+</div>
 </div>
 <div class="sect2">
 <h3 id="_creating_your_first_excel_document">Creating your first Excel document</h3>
@@ -902,7 +907,7 @@ following types are supported out of the box:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         row {
             // Empty cell
@@ -1261,7 +1266,7 @@ Examples will be based on Apache POI examples.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-15 19:20:05 +04:00
+Last updated 2016-12-15 19:41:27 +04:00
 </div>
 </div>
 </body>
