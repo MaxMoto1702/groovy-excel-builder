@@ -75,7 +75,7 @@ workbook.write(someOutputStream)
 
 NOTE: Font name can be any object. Example, simple enum value.
 
-=== Configure font in simple (included) style
+=== Configure font inline style
 
 [source,groovy]
 ----
