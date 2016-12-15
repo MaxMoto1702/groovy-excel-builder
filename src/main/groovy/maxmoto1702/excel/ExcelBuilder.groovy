@@ -13,6 +13,7 @@ class ExcelBuilder {
 
     def workbook = new SXSSFWorkbook()
     def fonts = [:]
+    def formats = [:]
     def styles = [:]
     def currentSheet
     def currentRowIndex
@@ -39,34 +40,71 @@ class ExcelBuilder {
         this
     }
 
-    def style(style, Closure closure) {
-        log.debug "Create style with name: ${style?.toString()}"
-        if (!style) {
-            log.error('Style is null')
+    def style(styleNameObj, Closure closure) {
+        log.debug "Create style with name: ${styleNameObj?.toString()}"
+        if (!styleNameObj) {
+            log.error('Style name is null')
+            throw new RuntimeException('Style name is null')
         }
         closure.delegate = this
-        def styleName = style.toString()
+        def styleName = styleNameObj.toString()
         def newStyle = workbook.createCellStyle()
         closure(newStyle)
         styles[styleName] = newStyle
         newStyle
     }
 
-    def font(font) {
-        log.debug "Get font with name: $font"
-        if (!fonts[font]) {
-            log.error "Font ${font?.toString()} not found"
+    def font(fontNameObj) {
+        log.debug "Get font with name: $fontNameObj"
+        def fontName = fontNameObj.toString()
+        if (!fonts[fontName]) {
+            log.error "Font ${fontName} not found"
+            throw new RuntimeException("Font ${fontName} not found")
         }
-        fonts[font]
+        fonts[fontName]
     }
 
-    def font(font, Closure closure) {
-        log.debug "Create font with name: $font"
+    def font(fontNameObj, Closure closure) {
+        log.debug "Create font with name: $fontNameObj"
+        if (!fontNameObj) {
+            log.error('Font name is null')
+            throw new RuntimeException('Font name is null')
+        }
         closure.delegate = this
         def newFont = workbook.createFont()
         closure(newFont)
-        fonts[font] = newFont
+        def fontName = fontNameObj.toString()
+        fonts[fontName] = newFont
         newFont
+    }
+
+    def dataFormat(formatNameObj) {
+        log.debug "Get format with name: $formatNameObj"
+        def formatName = formatNameObj.toString()
+        if (!formats[formatName]) {
+            log.error "Font $formatName not found"
+            throw new RuntimeException("Font $formatName not found")
+        }
+        formats[formatName]
+    }
+
+    def dataFormat(formatNameObj, String format) {
+        def closurre = {
+            format
+        }
+        dataFormat(formatNameObj, closurre as Closure)
+    }
+
+    def dataFormat(formatNameObj, Closure closure) {
+        log.debug "Create format with name: $formatNameObj"
+        if (!formatNameObj) {
+            log.error('Format name is null')
+            throw new RuntimeException('Format name is null')
+        }
+        def formatName = formatNameObj.toString()
+        def newFormat = workbook.createDataFormat().getFormat(closure() as String)
+        formats[formatName] = newFormat
+        newFormat
     }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////

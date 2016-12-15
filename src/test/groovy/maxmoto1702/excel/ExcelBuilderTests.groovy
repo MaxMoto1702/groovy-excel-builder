@@ -128,6 +128,70 @@ class ExcelBuilderTests extends Specification {
         (workbook.getSheetAt(0).getRow(0).getCell(1).cellStyle as XSSFCellStyle).font.fontName == 'Arial'
     }
 
+    def "test formats"() {
+        setup:
+        def builder = new ExcelBuilder()
+
+        when:
+        builder.config {
+            // style with waterfall configured format (string)
+            dataFormat('1', '# ##0.00')
+            style('1') { cellStyle ->
+                cellStyle.dataFormat = dataFormat('1')
+            }
+
+            // style with included configured format (string)
+            style('2') { cellStyle ->
+                cellStyle.dataFormat = dataFormat('2', '# ### ##0.00')
+            }
+
+            // style with waterfall configured format (closure)
+            dataFormat('3') { format ->
+                '# ### ### ##0.00'
+            }
+            style('3') { cellStyle ->
+                cellStyle.dataFormat = dataFormat('3')
+            }
+
+            // style with included configured format (closure)
+            style('4') { XSSFCellStyle cellStyle ->
+                cellStyle.dataFormat = dataFormat('4') { format ->
+                    '# ### ### ### ##0.00'
+                }
+            }
+        }
+        def workbook = builder.build {
+            sheet {
+                row {
+                    cell(style: '1') {
+                        'test style with waterfall configured format (string)'
+                    }
+                    cell(style: '2') {
+                        'test style with included configured format (string)'
+                    }
+                    cell(style: '3') {
+                        'test style with waterfall configured format (closure)'
+                    }
+                    cell(style: '4') {
+                        'test style with included configured format (closure)'
+                    }
+                }
+            }
+        }
+
+        then:
+        workbook.getSheetAt(0) != null
+        workbook.getSheetAt(0).getRow(0) != null
+        workbook.getSheetAt(0).getRow(0).getCell(0) != null
+        workbook.getSheetAt(0).getRow(0).getCell(0).cellStyle.dataFormatString == '# ##0.00'
+        workbook.getSheetAt(0).getRow(0).getCell(1) != null
+        workbook.getSheetAt(0).getRow(0).getCell(1).cellStyle.dataFormatString == '# ### ##0.00'
+        workbook.getSheetAt(0).getRow(0).getCell(2) != null
+        workbook.getSheetAt(0).getRow(0).getCell(2).cellStyle.dataFormatString == '# ### ### ##0.00'
+        workbook.getSheetAt(0).getRow(0).getCell(3) != null
+        workbook.getSheetAt(0).getRow(0).getCell(3).cellStyle.dataFormatString == '# ### ### ### ##0.00'
+    }
+
     def "test spans"() {
         setup:
         def builder = new ExcelBuilder()

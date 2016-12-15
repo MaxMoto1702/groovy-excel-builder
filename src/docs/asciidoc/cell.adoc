@@ -18,7 +18,7 @@ You can easily create rows with the following syntax:
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         row {
             // Empty cell

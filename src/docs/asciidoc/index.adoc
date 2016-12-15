@@ -12,3 +12,5 @@ include::row.adoc[]
 include::cell.adoc[]
 
 include::style.adoc[]
+
+include::example.adoc[]

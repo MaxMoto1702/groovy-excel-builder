@@ -1,8 +1,46 @@
 [[styles]]
 == Styling Cells
 
-== Font
+== Data format
 
+Data format setting as string.
+
+[source,groovy]
+----
+def builder = new ExcelBuilder()
+
+builder.config {
+    // waterfall
+    dataFormat('money', '# ##0.00')
+    style('style with money format') { cellStyle ->
+        cellStyle.dataFormat = dataFormat('money')
+    }
+
+    // inline
+    style('style with number format') { cellStyle ->
+        cellStyle.dataFormat = dataFormat('money', '#0')
+    }
+}
+
+builder.build {
+    sheet {
+        row {
+            cell(style: 'style with money format') {
+                1000.00
+            }
+            cell(style: 'style with number format') {
+                1000
+            }
+        }
+    }
+}
+
+workbook.write(someOutputStream)
+----
+
+NOTE: Format name can be any object. Example, simple enum value.
+
+== Font
 
 Fonts are configure via Apache POI API. See list of properties in class
 https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFFont.html[XSSFFont]
