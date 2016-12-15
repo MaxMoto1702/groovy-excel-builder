@@ -449,15 +449,13 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <li><a href="#_styles">Styles</a></li>
 </ul>
 </li>
-<li><a href="#styles">Styling Cells</a></li>
-<li><a href="#_data_format">Data format</a></li>
-<li><a href="#_font">Font</a>
+<li><a href="#styles">Styling Cells</a>
 <ul class="sectlevel2">
-<li><a href="#_configure_font_in_waterfall_style">Configure font in waterfall style</a></li>
-<li><a href="#_configure_font_inline_style">Configure font inline style</a></li>
+<li><a href="#_data_format">Data format</a></li>
+<li><a href="#_font">Font</a></li>
+<li><a href="#_style">Style</a></li>
 </ul>
 </li>
-<li><a href="#_style">Style</a></li>
 <li><a href="#_examples">Examples</a></li>
 </ul>
 </div>
@@ -1061,12 +1059,8 @@ Style on cell level override style on level row&amp;
 <div class="sect1">
 <h2 id="styles">Styling Cells</h2>
 <div class="sectionbody">
-
-</div>
-</div>
-<div class="sect1">
-<h2 id="_data_format">Data format</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_data_format">Data format</h3>
 <div class="paragraph">
 <p>Data format setting as string.</p>
 </div>
@@ -1116,16 +1110,14 @@ Format name can be any object. Example, simple enum value.
 </table>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_font">Font</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_font">Font</h3>
 <div class="paragraph">
 <p>Fonts are configure via Apache POI API. See list of properties in class
 <a href="https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFFont.html">XSSFFont</a></p>
 </div>
-<div class="sect2">
-<h3 id="_configure_font_in_waterfall_style">Configure font in waterfall style</h3>
+<div class="sect3">
+<h4 id="_configure_font_in_waterfall_style">Configure font in waterfall style</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">def builder = new ExcelBuilder()
@@ -1165,8 +1157,8 @@ Font name can be any object. Example, simple enum value.
 </table>
 </div>
 </div>
-<div class="sect2">
-<h3 id="_configure_font_inline_style">Configure font inline style</h3>
+<div class="sect3">
+<h4 id="_configure_font_inline_style">Configure font inline style</h4>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">def builder = new ExcelBuilder()
@@ -1194,10 +1186,8 @@ workbook.write(someOutputStream)</code></pre>
 </div>
 </div>
 </div>
-</div>
-<div class="sect1">
-<h2 id="_style">Style</h2>
-<div class="sectionbody">
+<div class="sect2">
+<h3 id="_style">Style</h3>
 <div class="paragraph">
 <p>Styles in the builder set up similarly with classes in HTML. First,
 configure styles and then apply them to the rows or cells.</p>
@@ -1248,6 +1238,7 @@ Style name can be any object. Example, simple enum value.
 </div>
 </div>
 </div>
+</div>
 <div class="sect1">
 <h2 id="_examples">Examples</h2>
 <div class="sectionbody">
@@ -1268,7 +1259,7 @@ Examples will be based on Apache POI examples.
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-12-15 19:57:29 +04:00
+Last updated 2016-12-15 19:58:51 +04:00
 </div>
 </div>
 </body>
