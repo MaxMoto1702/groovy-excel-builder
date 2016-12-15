@@ -26,6 +26,10 @@ repositories {
 compile '{groupId}:{artifactId}:{version}'
 ----
 
+Or download
+http://repo.serebryanskiy.site/{groupId}/{artifactId}/{version}/excel-builder-1.0-RC1.jar[library]
+and add to your project.
+
 === Creating your first Excel document
 
 Here is the simplest example to create an Excel document:
