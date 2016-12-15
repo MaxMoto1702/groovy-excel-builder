@@ -424,6 +424,7 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 <ul class="sectlevel2">
 <li><a href="#_installation">Installation</a></li>
 <li><a href="#_creating_your_first_excel_document">Creating your first Excel document</a></li>
+<li><a href="#_creating_your_excel_document_with_dynamic_data">Creating your Excel document with dynamic data</a></li>
 </ul>
 </li>
 <li><a href="#sheet">Sheet</a>
@@ -482,9 +483,9 @@ or if you have a great idea for improving this library, please
 <div class="title">Maven</div>
 <div class="content">
 <pre class="highlight"><code class="language-xml" data-lang="xml">&lt;dependency&gt;
-    &lt;groupId&gt;{groupId}&lt;/groupId&gt;
-    &lt;artifactId&gt;{artifactId}&lt;/artifactId&gt;
-    &lt;version&gt;{version}&lt;/version&gt;
+    &lt;groupId&gt;maxmoto1702&lt;/groupId&gt;
+    &lt;artifactId&gt;excel-builder&lt;/artifactId&gt;
+    &lt;version&gt;1.0-RC1&lt;/version&gt;
 &lt;/dependency&gt;</code></pre>
 </div>
 </div>
@@ -496,7 +497,7 @@ or if you have a great idea for improving this library, please
         url "http://repo.serebryanskiy.site/"
     }
 }
-compile '{groupId}:{artifactId}:{version}'</code></pre>
+compile 'maxmoto1702:excel-builder:1.0-RC1'</code></pre>
 </div>
 </div>
 </div>
@@ -517,9 +518,32 @@ compile '{groupId}:{artifactId}:{version}'</code></pre>
     }
 }
 
-workbook.write(someOutputStream)</code></pre>
+workbook.write(new FileOutputStream(new File('sample.xlsx')))</code></pre>
 </div>
 </div>
+<div class="paragraph">
+<p>As you might imagine from that example, a single sheet will be created with
+the value of "test" in cell <code>A1</code>:</p>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 10%;">
+<caption class="title">Table 1. Content file 'sample.xlsx'</caption>
+<colgroup>
+<col style="width: 20%;">
+<col style="width: 80%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top"><strong>A</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">test</p></td>
+</tr>
+</tbody>
+</table>
 <div class="admonitionblock note">
 <table>
 <tr>
@@ -534,10 +558,6 @@ format and supports streaming version of Workbook (SXSSFWorkbook) only.
 </table>
 </div>
 <div class="paragraph">
-<p>As you might imagine from that example, a single sheet will be created with
-the value of "test" in cell <code>A1</code>.</p>
-</div>
-<div class="paragraph">
 <p>In addition to writing the excel document directly to an output stream, you
 can also just build the document and do what you want with it afterwards.</p>
 </div>
@@ -545,6 +565,107 @@ can also just build the document and do what you want with it afterwards.</p>
 <p>The Groovy Excel Builder provides several options and features for creating
 documents. To learn more, continue on reading this documentation.</p>
 </div>
+</div>
+<div class="sect2">
+<h3 id="_creating_your_excel_document_with_dynamic_data">Creating your Excel document with dynamic data</h3>
+<div class="listingblock">
+<div class="content">
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
+    sheet {
+        (1..6).each { number -&gt;
+            row {
+                ('A'..'F').each { letter -&gt;
+                    cell {
+                        "$number $letter"
+                    }
+                }
+            }
+        }
+    }
+}
+
+workbook.write(new FileOutputStream(new File('dynamic_data.xlsx')))</code></pre>
+</div>
+</div>
+<table class="tableblock frame-all grid-all" style="width: 65%;">
+<caption class="title">Table 2. Content file 'sample.xlsx'</caption>
+<colgroup>
+<col style="width: 4%;">
+<col style="width: 16%;">
+<col style="width: 16%;">
+<col style="width: 16%;">
+<col style="width: 16%;">
+<col style="width: 16%;">
+<col style="width: 16%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top"><strong>A</strong></th>
+<th class="tableblock halign-left valign-top"><strong>B</strong></th>
+<th class="tableblock halign-left valign-top"><strong>C</strong></th>
+<th class="tableblock halign-left valign-top"><strong>D</strong></th>
+<th class="tableblock halign-left valign-top"><strong>E</strong></th>
+<th class="tableblock halign-left valign-top"><strong>F</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>1</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>2</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">1 A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">2 F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>3</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">3 F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>4</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">4 F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>5</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5 A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5 C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5 D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5 E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">5 F</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><strong>6</strong></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 A</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 B</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 C</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 D</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 E</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">6 F</p></td>
+</tr>
+</tbody>
+</table>
 </div>
 </div>
 </div>
@@ -558,7 +679,7 @@ level for configuring your document.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
     }
 }</code></pre>
@@ -572,7 +693,7 @@ the <code>sheet</code> method with a parameter <code>name: String</code>.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet(name: "My Sheet") {
     }
 }</code></pre>
@@ -587,7 +708,7 @@ the <code>sheet</code> method with a parameter <code>widthColumns: List</code>.<
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet(widthColumns: [10, 20, 30]) {
     }
     sheet(widthColumns: ['default', 20, 30]) {
@@ -625,7 +746,7 @@ to you to make documents easier.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         //Empty row
         row {
@@ -649,7 +770,7 @@ to you to make documents easier.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell {
@@ -725,7 +846,7 @@ to you to make documents easier.</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         row(style: 'row-style') {
         }
@@ -798,7 +919,7 @@ following types are supported out of the box:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell {
@@ -865,7 +986,7 @@ following types are supported out of the box:</p>
 </div>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell(rowspan: 2) {
@@ -898,7 +1019,7 @@ Excel-file past will be deleted.
 <h3 id="_styles">Styles</h3>
 <div class="listingblock">
 <div class="content">
-<pre class="highlight"><code class="language-groovy" data-lang="groovy">ExcelBuilder.build {
+<pre class="highlight"><code class="language-groovy" data-lang="groovy">def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell(style: 'cell-style') {
@@ -931,15 +1052,21 @@ Style on cell level override style on level row&amp;
 configure styles and then apply them to the rows or cells.</p>
 </div>
 <div class="paragraph">
-<p>Styles are configure via Apache POI API.</p>
+<p>Styles are configure via Apache POI API. See list of properties in class
+<a href="https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFCellStyle.html">XSSFCellStyle</a></p>
 </div>
 <div class="listingblock">
 <div class="content">
 <pre class="highlight"><code class="language-groovy" data-lang="groovy">def builder = new ExcelBuilder()
 
 builder.config {
-    style { CellStyle cellStyle -&gt;
+    style { cellStyle -&gt;
         // Configure style using Apache POI API
+        cellStyle.verticalAlignment = CellStyle.VERTICAL_CENTER
+        cellStyle.alignment = CellStyle.ALIGN_CENTER
+        cellStyle.wrapText = true
+        // ...
+        return cellStyle
     }
 }
 
@@ -961,7 +1088,7 @@ workbook.write(someOutputStream)</code></pre>
 </div>
 <div id="footer">
 <div id="footer-text">
-Last updated 2016-11-28 14:33:49 +04:00
+Last updated 2016-12-15 14:54:03 +04:00
 </div>
 </div>
 </body>
