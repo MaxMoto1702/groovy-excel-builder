@@ -10,7 +10,7 @@ You can easily create rows with the following syntax:
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         //Empty row
         row {
@@ -32,7 +32,7 @@ It is very easy to skip any number of rows. See the following example:
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell {
@@ -79,7 +79,7 @@ You can apply default styling at the row level.
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         row(style: 'row-style') {
         }

@@ -7,7 +7,7 @@ level for configuring your document.
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
     }
 }
@@ -20,7 +20,7 @@ the `sheet` method with a parameter `name: String`.
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet(name: "My Sheet") {
     }
 }
@@ -33,7 +33,7 @@ the `sheet` method with a parameter `widthColumns: List`.
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet(widthColumns: [10, 20, 30]) {
     }
     sheet(widthColumns: ['default', 20, 30]) {

@@ -4,15 +4,21 @@
 Styles in the builder set up similarly with classes in HTML. First,
 configure styles and then apply them to the rows or cells.
 
-Styles are configure via Apache POI API.
+Styles are configure via Apache POI API. See list of properties in class
+https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFCellStyle.html[XSSFCellStyle]
 
 [source,groovy]
 ----
 def builder = new ExcelBuilder()
 
 builder.config {
-    style { CellStyle cellStyle ->
+    style { cellStyle ->
         // Configure style using Apache POI API
+        cellStyle.verticalAlignment = CellStyle.VERTICAL_CENTER
+        cellStyle.alignment = CellStyle.ALIGN_CENTER
+        cellStyle.wrapText = true
+        // ...
+        return cellStyle
     }
 }
 

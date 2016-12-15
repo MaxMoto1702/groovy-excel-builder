@@ -42,7 +42,7 @@ It is very easy to skip any number of cells. See the following example:
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell {
@@ -80,7 +80,7 @@ You can apply row or column spans to cell.
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell(rowspan: 2) {
@@ -102,7 +102,7 @@ Excel-file past will be deleted.
 
 [source,groovy]
 ----
-ExcelBuilder.build {
+def workbook = new ExcelBuilder().build {
     sheet {
         row {
             cell(style: 'cell-style') {
