@@ -102,7 +102,7 @@ builder.build {
 workbook.write(someOutputStream)
 ----
 
-=== Style
+== Style
 
 Styles in the builder set up similarly with classes in HTML. First,
 configure styles and then apply them to the rows or cells.
