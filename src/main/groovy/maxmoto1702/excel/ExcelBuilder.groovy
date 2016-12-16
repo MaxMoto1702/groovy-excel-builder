@@ -255,7 +255,12 @@ class ExcelBuilder {
         ))
         if (colspan > 1) {
             (1..colspan - 1).each {
-                currentRow.createCell(currentCellIndex + it)
+                def cell = currentRow.createCell(currentCellIndex + it)
+                if (currentCellStyle) {
+                    cell.setCellStyle(currentCellStyle as CellStyle)
+                } else if (currentRowStyle) {
+                    cell.setCellStyle(currentRowStyle as CellStyle)
+                }
             }
         }
     }
