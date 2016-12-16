@@ -6,7 +6,7 @@ version '1.0-RC1'
 group 'maxmoto1702'
 
 apply plugin: 'groovy'
-//apply plugin: 'maven'
+apply plugin: 'maven'
 
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
@@ -42,14 +42,10 @@ asciidoctor {
     ]
 }
 
-task simple << {
-    println project.version
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            repository(url: "file:///${buildDir}/repo/")
+        }
+    }
 }
-
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            repository(url: "file:///tmp/repo/")
-//        }
-//    }
-//}
