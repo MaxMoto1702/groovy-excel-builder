@@ -442,7 +442,8 @@ http://poi.apache.org/spreadsheet/quick-guide.html#Alignment[source example]
         row.setHeightInPoints(30);
 
         createCell(wb, row, (short) 0, CellStyle.ALIGN_CENTER, CellStyle.VERTICAL_BOTTOM);
-        createCell(wb, row, (short) 1, CellStyle.ALIGN_CENTER_SELECTION, CellStyle.VERTICAL_BOTTOM);
+        createCell(wb, row, (short) 1, CellStyle.ALIGN_CENTER_SELECTION,
+            CellStyle.VERTICAL_BOTTOM);
         createCell(wb, row, (short) 2, CellStyle.ALIGN_FILL, CellStyle.VERTICAL_CENTER);
         createCell(wb, row, (short) 3, CellStyle.ALIGN_GENERAL, CellStyle.VERTICAL_CENTER);
         createCell(wb, row, (short) 4, CellStyle.ALIGN_JUSTIFY, CellStyle.VERTICAL_JUSTIFY);
@@ -464,7 +465,8 @@ http://poi.apache.org/spreadsheet/quick-guide.html#Alignment[source example]
      * @param column the column number to create the cell in
      * @param halign the horizontal alignment for the cell.
      */
-    private static void createCell(Workbook wb, Row row, short column, short halign, short valign) {
+    private static void createCell(Workbook wb, Row row, short column,
+                                    short halign, short valign) {
         Cell cell = row.createCell(column);
         cell.setCellValue("Align It");
         CellStyle cellStyle = wb.createCellStyle();
