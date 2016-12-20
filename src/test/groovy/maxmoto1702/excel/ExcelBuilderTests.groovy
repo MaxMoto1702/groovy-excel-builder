@@ -259,6 +259,9 @@ class ExcelBuilderTests extends Specification {
                         "this column has width 35"
                     }
                 }
+                row(height: defaultRowHeight) {
+                    cell()
+                }
             }
         }
 
@@ -276,6 +279,8 @@ class ExcelBuilderTests extends Specification {
         workbook.getSheet("Demo config height and width").getRow(1).getCell(0) != null
         workbook.getSheet("Demo config height and width").getRow(1).getCell(1) != null
         workbook.getSheet("Demo config height and width").getRow(1).getCell(2) != null
+        workbook.getSheetAt(0).getRow(2) != null
+        workbook.getSheetAt(0).getRow(2).height == workbook.getSheetAt(0).defaultRowHeight
     }
 
     def "test dynamic data"() {

@@ -73,7 +73,7 @@ The above example will produce a sheet that looks something like this:
 |*6* |C
 |=======
 
-=== Defaults
+=== Styling rows
 
 You can apply default styling at the row level.
 
@@ -82,6 +82,20 @@ You can apply default styling at the row level.
 def workbook = new ExcelBuilder().build {
     sheet {
         row(style: 'row-style') {
+        }
+    }
+}
+----
+
+=== Default row height
+
+You can access to default row height:
+
+[source,groovy]
+----
+def workbook = new ExcelBuilder().build {
+    sheet {
+        row(height: defaultRowHeight * 2) {
         }
     }
 }

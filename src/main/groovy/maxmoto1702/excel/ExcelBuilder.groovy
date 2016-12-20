@@ -3,13 +3,14 @@ package maxmoto1702.excel
 import groovy.util.logging.Slf4j
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.CellStyle
-import org.apache.poi.ss.usermodel.Font
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.util.CellRangeAddress
 import org.apache.poi.xssf.streaming.SXSSFWorkbook
 
 @Slf4j
 class ExcelBuilder {
+
+    static defaultRowHeight = -1
 
     def workbook = new SXSSFWorkbook()
     def fonts = [:]
@@ -131,6 +132,7 @@ class ExcelBuilder {
         closure.delegate = this
         def sheetName = params?.name ?: generateSheetName()
         currentSheet = workbook.getSheet(sheetName) ?: workbook.createSheet(sheetName)
+        defaultRowHeight = currentSheet.defaultRowHeightInPoints
         if (params?.widthColumns) {
             params?.widthColumns?.eachWithIndex { width, idx ->
                 if (width != 'default')
