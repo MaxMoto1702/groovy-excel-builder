@@ -1,38 +1,34 @@
 plugins {
-    id 'org.asciidoctor.gradle.asciidoctor' version '1.5.1'
+    id 'org.asciidoctor.jvm.convert' version '4.0.2'
+    id 'groovy'
+    id 'maven-publish'
 }
 
 version '1.1.0'
 group 'maxmoto1702'
-
-apply plugin: 'groovy'
-apply plugin: 'maven'
-
-sourceCompatibility = 1.6
-targetCompatibility = 1.6
 
 repositories {
     mavenCentral()
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.4.6'
-    compile 'org.apache.poi:poi:3.14'
-    compile 'org.apache.poi:poi-ooxml:3.14'
-    compile 'org.slf4j:slf4j-api:1.7.12'
+    implementation 'org.codehaus.groovy:groovy-all:2.4.6'
+    implementation 'org.apache.poi:poi:3.14'
+    implementation 'org.apache.poi:poi-ooxml:3.14'
+    implementation 'org.slf4j:slf4j-api:1.7.12'
 
-    testCompile 'org.apache.logging.log4j:log4j-api:2.3'
-    testCompile 'org.apache.logging.log4j:log4j-core:2.3'
-    testCompile 'org.apache.logging.log4j:log4j-slf4j-impl:2.3'
-    testCompile 'org.slf4j:jcl-over-slf4j:1.7.6'
-    testCompile group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'
+    testImplementation 'org.apache.logging.log4j:log4j-api:2.3'
+    testImplementation 'org.apache.logging.log4j:log4j-core:2.3'
+    testImplementation 'org.apache.logging.log4j:log4j-slf4j-impl:2.3'
+    testImplementation 'org.slf4j:jcl-over-slf4j:1.7.6'
+    testImplementation group: 'org.spockframework', name: 'spock-core', version: '1.0-groovy-2.4'
 }
 
 asciidoctor {
     logDocuments = true
-    backends = [
-            'html5'
-    ]
+    outputOptions {
+        backends = ['html5']
+    }
     attributes = [
             'toc'      : 'left',
             'sourceDir': "${projectDir}/src/main/groovy",
@@ -42,10 +38,15 @@ asciidoctor {
     ]
 }
 
-uploadArchives {
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
     repositories {
-        mavenDeployer {
-            repository(url: "file:///${buildDir}/repo/")
+        maven {
+            url = uri("${buildDir}/repo")
         }
     }
 }
