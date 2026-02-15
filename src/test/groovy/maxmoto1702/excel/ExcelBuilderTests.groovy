@@ -1,6 +1,8 @@
 package maxmoto1702.excel
 
 import org.apache.poi.ss.usermodel.CellStyle
+import org.apache.poi.ss.usermodel.BorderStyle
+import org.apache.poi.ss.usermodel.HorizontalAlignment
 import org.apache.poi.xssf.usermodel.XSSFCellStyle
 import org.apache.poi.xssf.usermodel.XSSFFont
 import spock.lang.*
@@ -50,12 +52,12 @@ class ExcelBuilderTests extends Specification {
         when:
         builder.config {
             style('commonStyle') { cellStyle ->
-                cellStyle.alignment = CellStyle.ALIGN_CENTER
-                cellStyle.borderBottom = CellStyle.BORDER_DASH_DOT
+                cellStyle.alignment = HorizontalAlignment.CENTER
+                cellStyle.borderBottom = BorderStyle.DASH_DOT
             }
             style('customStyle') { cellStyle ->
-                cellStyle.alignment = CellStyle.ALIGN_LEFT
-                cellStyle.borderTop = CellStyle.BORDER_DOUBLE
+                cellStyle.alignment = HorizontalAlignment.LEFT
+                cellStyle.borderTop = BorderStyle.DOUBLE
             }
         }
         def workbook = builder.build {
@@ -77,12 +79,12 @@ class ExcelBuilderTests extends Specification {
         then:
         workbook.getSheet("Demo styles") != null
         workbook.getSheet("Demo styles").getRow(0) != null
-        workbook.getSheet("Demo styles").getRow(0).getCell(0).getCellStyle().alignment == CellStyle.ALIGN_CENTER
-        workbook.getSheet("Demo styles").getRow(0).getCell(0).getCellStyle().borderBottom == CellStyle.BORDER_DASH_DOT
-        workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.alignment == CellStyle.ALIGN_CENTER
-        workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.borderBottom == CellStyle.BORDER_DASH_DOT
-        workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.alignment == CellStyle.ALIGN_LEFT
-        workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.borderTop == CellStyle.BORDER_DOUBLE
+        workbook.getSheet("Demo styles").getRow(0).getCell(0).getCellStyle().alignment == HorizontalAlignment.CENTER
+        workbook.getSheet("Demo styles").getRow(0).getCell(0).getCellStyle().borderBottom == BorderStyle.DASH_DOT
+        workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.alignment == HorizontalAlignment.CENTER
+        workbook.getSheet("Demo styles").getRow(0).getCell(1).cellStyle.borderBottom == BorderStyle.DASH_DOT
+        workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.alignment == HorizontalAlignment.LEFT
+        workbook.getSheet("Demo styles").getRow(0).getCell(2).cellStyle.borderTop == BorderStyle.DOUBLE
     }
 
     def "test fonts"() {

@@ -188,30 +188,17 @@ class ExcelBuilder {
             closure.delegate = this
             def value = closure()
             log.debug "Set cell value: $value"
-            switch (value?.class) {
-                case Short:
-                case Integer:
-                case Long:
-                case Float:
-                case Double:
-                case BigDecimal:
-                    currentCell.setCellValue(value as Double)
-                    break
-                case String:
-                    currentCell.setCellValue(value as String)
-                    break
-                case Calendar:
-                    currentCell.setCellValue(value as Calendar)
-                    break
-                case Date:
-                    if (value.time > 0)
-                        currentCell.setCellValue(value as Date)
-                    else
-                        currentCell.setCellValue ""
-                    break
-                default:
-                    log.warn("Can not determine type of value because value write as string to cell")
-                    currentCell.setCellValue "$value"
+            if (value instanceof Number) {
+                currentCell.setCellValue((value as Number).doubleValue())
+            } else if (value instanceof String) {
+                currentCell.setCellValue(value as String)
+            } else if (value instanceof Calendar) {
+                currentCell.setCellValue(value as Calendar)
+            } else if (value instanceof Date) {
+                currentCell.setCellValue(value as Date)
+            } else {
+                log.warn("Can not determine type of value because value write as string to cell")
+                currentCell.setCellValue "$value"
             }
         }
         currentCell = null
