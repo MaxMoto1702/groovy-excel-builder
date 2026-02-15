@@ -1,0 +1,19 @@
+= Excel Builder (Kotlin DSL)
+:toc: left
+
+Kotlin DSL for building XLSX files on top of Apache POI.
+
+== Quick Start
+
+include::src/docs/asciidoc/start.adoc[leveloffset=+1]
+
+== Core Concepts
+
+include::src/docs/asciidoc/sheet.adoc[leveloffset=+1]
+include::src/docs/asciidoc/row.adoc[leveloffset=+1]
+include::src/docs/asciidoc/cell.adoc[leveloffset=+1]
+include::src/docs/asciidoc/style.adoc[leveloffset=+1]
+
+== Examples
+
+include::src/docs/asciidoc/example.adoc[leveloffset=+1]
