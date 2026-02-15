@@ -1,6 +1,13 @@
-[![Stories in Ready](https://badge.waffle.io/MaxMoto1702/groovy-excel-builder.png?label=ready&title=Ready)](https://waffle.io/MaxMoto1702/groovy-excel-builder)
-# Groovy Excel Builder
+# Excel Builder (Kotlin)
 
-A Groovy DSL for Building Excel Files
+Kotlin DSL for building XLSX files on top of Apache POI.
 
-Check out the [documentation](http://maxmoto1702.github.io/groovy-excel-builder/)!
+## Documentation
+
+Project docs live in `/src/docs/asciidoc`.
+
+## Build
+
+```bash
+./gradlew test
+```

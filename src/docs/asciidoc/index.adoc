@@ -1,4 +1,4 @@
-= Groovy Excel Builder
+= Excel Builder (Kotlin DSL)
 Max Serebryanskiy
 
 include::intro.adoc[]

@@ -11,9 +11,9 @@
 
 /*
 // To declare projects as part of a multi-project build use the 'include' method
-include 'shared'
-include 'api'
-include 'services:webservice'
+include("shared")
+include("api")
+include("services:webservice")
 */
 
-rootProject.name = 'excel-builder'
+rootProject.name = "excel-builder"

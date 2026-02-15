@@ -1,26 +1,18 @@
 [[row]]
 == Rows
 
-In addition to creating cells, there are also a few other methods available
-to you to make documents easier.
-
 === Creating Rows
 
-You can easily create rows with the following syntax:
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
-        //Empty row
         row {
         }
 
-        //Empty row
         row()
 
-        //Empty row with height specified
-        row(height: 10) {
+        row(height = 10) {
         }
     }
 }
@@ -28,74 +20,48 @@ def workbook = new ExcelBuilder().build {
 
 === Skipping Rows
 
-It is very easy to skip any number of rows. See the following example:
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
         row {
-            cell {
-                'A'
-            }
+            cell { "A" }
         }
 
         skipRow()
 
         row {
-            cell {
-                'B'
-            }
+            cell { "B" }
         }
 
         skipRow(2)
 
         row {
-            cell {
-                'C'
-            }
+            cell { "C" }
         }
     }
 }
 ----
 
-The above example will produce a sheet that looks something like this:
+=== Styling Rows
 
-[width="15",cols="1,4"]
-|=======
-|    |*A*
-
-|*1* |A
-|*2* |
-|*3* |B
-|*4* |
-|*5* |
-|*6* |C
-|=======
-
-=== Styling rows
-
-You can apply default styling at the row level.
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
-        row(style: 'row-style') {
+        row(style = "row-style") {
         }
     }
 }
 ----
 
-=== Default row height
+=== Default Row Height
 
-You can access to default row height:
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
-        row(height: defaultRowHeight * 2) {
+        row(height = ExcelBuilder.defaultRowHeight * 2) {
         }
     }
 }

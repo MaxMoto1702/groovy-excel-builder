@@ -3,8 +3,7 @@
 
 === Cell Values
 
-This module supports setting basic and custom types to cell values. The
-following types are supported out of the box:
+Supported value types:
 
 * String
 * Calendar
@@ -12,25 +11,16 @@ following types are supported out of the box:
 * Number
 * Boolean
 
-=== Creating Rows
+=== Creating Cells
 
-You can easily create rows with the following syntax:
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
         row {
-            // Empty cell
-            cell {
-            }
-
-            // Empty cell
+            cell { }
             cell()
-
-            cell {
-                "Text"
-            }
+            cell { "Text" }
         }
     }
 }
@@ -38,78 +28,48 @@ def workbook = new ExcelBuilder().build {
 
 === Skipping Cells
 
-It is very easy to skip any number of cells. See the following example:
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
         row {
-            cell {
-                'A'
-            }
-
+            cell { "A" }
             skipCell()
-
-            cell {
-                'B'
-            }
-
+            cell { "B" }
             skipCell(2)
-
-            cell {
-                'C'
-            }
+            cell { "C" }
         }
     }
 }
 ----
-
-The above example will produce a sheet that looks something like this:
-
-[width="65",cols="1,4,4,4,4,4,4"]
-|=======
-|    |*A* |*B* |*C* |*D* |*E* |*F*
-
-|*1* |A   |    |B   |    |    |C
-|=======
 
 === Spans
 
-You can apply row or column spans to cell.
-
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
         row {
-            cell(rowspan: 2) {
-                "This cell takes two lines"
-            }
-
-            cell(colspan: 2) {
-                "This cell takes two columns"
-            }
+            cell(rowspan = 2) { "This cell takes two rows" }
+            cell(colspan = 2) { "This cell takes two columns" }
         }
     }
 }
 ----
 
-NOTE: If spans will overlap each other, then when you open the
-Excel-file past will be deleted.
+NOTE: Overlapping merged regions are invalid in Excel and may be removed by the editor.
 
 === Styles
 
-[source,groovy]
+[source,kotlin]
 ----
-def workbook = new ExcelBuilder().build {
+val workbook = ExcelBuilder().build {
     sheet {
         row {
-            cell(style: 'cell-style') {
-            }
+            cell(style = "cell-style") { "Styled" }
         }
     }
 }
 ----
 
-NOTE: Style on cell level override style on level row&
+NOTE: Cell-level style overrides row-level style.
