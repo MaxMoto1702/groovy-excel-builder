@@ -1,141 +1,66 @@
 [[styles]]
 == Styling Cells
 
-=== Data format
+=== Data Format
 
-Data format setting as string.
-
-[source,groovy]
+[source,kotlin]
 ----
-def builder = new ExcelBuilder()
+val builder = ExcelBuilder()
 
 builder.config {
-    // waterfall
-    dataFormat('money', '# ##0.00')
-    style('style with money format') { cellStyle ->
-        cellStyle.dataFormat = dataFormat('money')
+    dataFormat("money", "# ##0.00")
+    style("money-style") { cellStyle ->
+        cellStyle.dataFormat = dataFormat("money")
     }
 
-    // inline
-    style('style with number format') { cellStyle ->
-        cellStyle.dataFormat = dataFormat('money', '#0')
+    style("number-style") { cellStyle ->
+        cellStyle.dataFormat = dataFormat("number", "#0")
     }
 }
 
-builder.build {
+val workbook = builder.build {
     sheet {
         row {
-            cell(style: 'style with money format') {
-                1000.00
-            }
-            cell(style: 'style with number format') {
-                1000
-            }
+            cell(style = "money-style") { 1000.00 }
+            cell(style = "number-style") { 1000 }
         }
     }
 }
-
-workbook.write(someOutputStream)
 ----
 
-NOTE: Format name can be any object. Example, simple enum value.
+=== Fonts
 
-=== Font
+Fonts are configured through Apache POI API:
+https://poi.apache.org/apidocs/dev/org/apache/poi/xssf/usermodel/XSSFFont.html[XSSFFont]
 
-Fonts are configure via Apache POI API. See list of properties in class
-https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFFont.html[XSSFFont]
-
-==== Configure font in waterfall style
-
-[source,groovy]
+[source,kotlin]
 ----
-def builder = new ExcelBuilder()
+val builder = ExcelBuilder()
 
 builder.config {
-    font('configured font') { font ->
-        font.fontName = 'Arial'
+    font("configured-font") { font ->
+        font.fontName = "Arial"
     }
-    style('style with configured font') { cellStyle ->
-        cellStyle.font = font('configured font')
-    }
-}
 
-builder.build {
-    sheet {
-        row {
-            cell(style: 'style with configured font') {
-                "test"
-            }
-        }
+    style("style-with-font") { cellStyle ->
+        cellStyle.setFont(font("configured-font"))
     }
 }
-
-workbook.write(someOutputStream)
 ----
 
-NOTE: Font name can be any object. Example, simple enum value.
+=== Styles
 
-==== Configure font inline style
+Styles are configured once and then applied to rows/cells.
 
-[source,groovy]
+[source,kotlin]
 ----
-def builder = new ExcelBuilder()
+val builder = ExcelBuilder()
 
 builder.config {
-    style('style with configured font') { cellStyle ->
-        cellStyle.font = font('configured font') { font ->
-            font.fontName = 'Arial'
-        }
-    }
-}
-
-builder.build {
-    sheet {
-        row {
-            cell(style: 'style with configured font') {
-                "test"
-            }
-        }
-    }
-}
-
-workbook.write(someOutputStream)
-----
-
-=== Style
-
-Styles in the builder set up similarly with classes in HTML. First,
-configure styles and then apply them to the rows or cells.
-
-Styles are configure via Apache POI API. See list of properties in class
-https://poi.apache.org/apidocs/org/apache/poi/xssf/usermodel/XSSFCellStyle.html[XSSFCellStyle]
-
-[source,groovy]
-----
-def builder = new ExcelBuilder()
-
-builder.config {
-    style { cellStyle ->
-        // Configure style using Apache POI API
-        cellStyle.verticalAlignment = CellStyle.VERTICAL_CENTER
-        cellStyle.alignment = CellStyle.ALIGN_CENTER
+    style("centered") { cellStyle ->
+        cellStyle.alignment = HorizontalAlignment.CENTER
+        cellStyle.borderBottom = BorderStyle.DASH_DOT
         cellStyle.wrapText = true
-        // ...
-        return cellStyle
     }
 }
-
-builder.build {
-    sheet {
-        row {
-            cell {
-                "test"
-            }
-        }
-    }
-}
-
-workbook.write(someOutputStream)
 ----
-
-NOTE: Style name can be any object. Example, simple enum value.

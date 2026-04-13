@@ -1,0 +1,24 @@
+style:
+  MagicNumber:
+    active: true
+    ignoreNumbers:
+      - '-1'
+      - '0'
+      - '1'
+      - '2'
+      - '256'
+exceptions:
+  TooGenericExceptionThrown:
+    active: false
+complexity:
+  TooManyFunctions:
+    active: false
+  CyclomaticComplexMethod:
+    active: false
+naming:
+  PackageNaming:
+    packagePattern: '[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*)*'
+formatting:
+  active: true
+  PackageName:
+    active: false

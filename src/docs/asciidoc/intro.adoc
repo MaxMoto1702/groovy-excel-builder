@@ -1,12 +1,11 @@
 [[introduction]]
 == Introduction
 
-This module exposes a Groovy DSL to create real Excel documents using
-https://poi.apache.org/[Apache POI] under the hood. The goal of this
-module is to abstract away the most common uses of
-https://poi.apache.org/[Apache POI] to make creating Excel documents
-very easy.
+This module exposes a Kotlin DSL to create Excel XLSX documents using
+https://poi.apache.org/[Apache POI].
+
+The goal is to keep common spreadsheet scenarios simple while still giving
+access to POI styles, fonts, formats, row/column sizing, and merge regions.
 
 If you encounter any issues or inconsistencies while using this library,
-or if you have a great idea for improving this library, please
-https://github.com/MaxMoto1702/groovy-excel-builder/issues[create an issue]!
+please https://github.com/MaxMoto1702/groovy-excel-builder/issues[create an issue].
